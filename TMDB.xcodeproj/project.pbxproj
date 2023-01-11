@@ -17,6 +17,14 @@
 		4B00BB0C296E8B4D008FB05C /* TMDBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B00BB0B296E8B4D008FB05C /* TMDBTests.swift */; };
 		4B00BB16296E8B4D008FB05C /* TMDBUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B00BB15296E8B4D008FB05C /* TMDBUITests.swift */; };
 		4B00BB18296E8B4D008FB05C /* TMDBUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B00BB17296E8B4D008FB05C /* TMDBUITestsLaunchTests.swift */; };
+		4B00BB31296E913E008FB05C /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B00BB30296E913E008FB05C /* NetworkService.swift */; };
+		4B00BB33296E9153008FB05C /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B00BB32296E9153008FB05C /* Endpoint.swift */; };
+		4B00BB35296E9163008FB05C /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B00BB34296E9163008FB05C /* NetworkError.swift */; };
+		4B00BB37296E9197008FB05C /* NetworkLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B00BB36296E9197008FB05C /* NetworkLogger.swift */; };
+		4B00BB3A296E91C0008FB05C /* Application Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B00BB39296E91C0008FB05C /* Application Endpoint.swift */; };
+		4B00BB3C296E91E3008FB05C /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B00BB3B296E91E3008FB05C /* Response.swift */; };
+		4B00BB3E296E9225008FB05C /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B00BB3D296E9225008FB05C /* Enums.swift */; };
+		4B00BB40296E92BC008FB05C /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B00BB3F296E92BC008FB05C /* Protocols.swift */; };
 		D1C8B501747B5AA41C508AC6 /* Pods_TMDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4BD726085504D29A4ED7464 /* Pods_TMDB.framework */; };
 		FA8B2705F1C8AAED13453365 /* Pods_TMDB_TMDBUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74F3E8EA27A7C142CBC78505 /* Pods_TMDB_TMDBUITests.framework */; };
 /* End PBXBuildFile section */
@@ -52,6 +60,14 @@
 		4B00BB11296E8B4D008FB05C /* TMDBUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TMDBUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B00BB15296E8B4D008FB05C /* TMDBUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBUITests.swift; sourceTree = "<group>"; };
 		4B00BB17296E8B4D008FB05C /* TMDBUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		4B00BB30296E913E008FB05C /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		4B00BB32296E9153008FB05C /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		4B00BB34296E9163008FB05C /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		4B00BB36296E9197008FB05C /* NetworkLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLogger.swift; sourceTree = "<group>"; };
+		4B00BB39296E91C0008FB05C /* Application Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Application Endpoint.swift"; sourceTree = "<group>"; };
+		4B00BB3B296E91E3008FB05C /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		4B00BB3D296E9225008FB05C /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		4B00BB3F296E92BC008FB05C /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		4EBE9D90BC946ADB4A0EBC43 /* Pods-TMDB-TMDBUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TMDB-TMDBUITests.debug.xcconfig"; path = "Target Support Files/Pods-TMDB-TMDBUITests/Pods-TMDB-TMDBUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		659CF6327D5DF6271792B42E /* Pods-TMDBTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TMDBTests.debug.xcconfig"; path = "Target Support Files/Pods-TMDBTests/Pods-TMDBTests.debug.xcconfig"; sourceTree = "<group>"; };
 		74F3E8EA27A7C142CBC78505 /* Pods_TMDB_TMDBUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TMDB_TMDBUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -221,6 +237,7 @@
 			children = (
 				4B00BB2E296E90A6008FB05C /* Networking */,
 				4B00BB2D296E909E008FB05C /* Networking Domain */,
+				4B00BB30296E913E008FB05C /* NetworkService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -228,6 +245,8 @@
 		4B00BB2C296E907C008FB05C /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				4B00BB3D296E9225008FB05C /* Enums.swift */,
+				4B00BB3F296E92BC008FB05C /* Protocols.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -235,6 +254,8 @@
 		4B00BB2D296E909E008FB05C /* Networking Domain */ = {
 			isa = PBXGroup;
 			children = (
+				4B00BB39296E91C0008FB05C /* Application Endpoint.swift */,
+				4B00BB3B296E91E3008FB05C /* Response.swift */,
 			);
 			path = "Networking Domain";
 			sourceTree = "<group>";
@@ -242,6 +263,9 @@
 		4B00BB2E296E90A6008FB05C /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				4B00BB32296E9153008FB05C /* Endpoint.swift */,
+				4B00BB34296E9163008FB05C /* NetworkError.swift */,
+				4B00BB36296E9197008FB05C /* NetworkLogger.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -502,9 +526,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B00BB37296E9197008FB05C /* NetworkLogger.swift in Sources */,
 				4B00BAF9296E8B4B008FB05C /* ViewController.swift in Sources */,
+				4B00BB3A296E91C0008FB05C /* Application Endpoint.swift in Sources */,
+				4B00BB40296E92BC008FB05C /* Protocols.swift in Sources */,
 				4B00BAF5296E8B4B008FB05C /* AppDelegate.swift in Sources */,
+				4B00BB3C296E91E3008FB05C /* Response.swift in Sources */,
+				4B00BB31296E913E008FB05C /* NetworkService.swift in Sources */,
+				4B00BB35296E9163008FB05C /* NetworkError.swift in Sources */,
 				4B00BAF7296E8B4B008FB05C /* SceneDelegate.swift in Sources */,
+				4B00BB3E296E9225008FB05C /* Enums.swift in Sources */,
+				4B00BB33296E9153008FB05C /* Endpoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
