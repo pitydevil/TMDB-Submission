@@ -101,7 +101,6 @@
 				659CF6327D5DF6271792B42E /* Pods-TMDBTests.debug.xcconfig */,
 				7E89C9C56B7574CD44BF6BA0 /* Pods-TMDBTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -130,8 +129,13 @@
 		4B00BAF3296E8B4B008FB05C /* TMDB */ = {
 			isa = PBXGroup;
 			children = (
-				4B00BAF4296E8B4B008FB05C /* AppDelegate.swift */,
-				4B00BAF6296E8B4B008FB05C /* SceneDelegate.swift */,
+				4B00BB24296E9026008FB05C /* Base */,
+				4B00BB25296E902A008FB05C /* Model */,
+				4B00BB2B296E9073008FB05C /* Services */,
+				4B00BB28296E904E008FB05C /* Components */,
+				4B00BB27296E9031008FB05C /* ViewModels */,
+				4B00BB26296E902D008FB05C /* Views */,
+				4B00BB2C296E907C008FB05C /* Utils */,
 				4B00BAF8296E8B4B008FB05C /* ViewController.swift */,
 				4B00BAFA296E8B4B008FB05C /* Main.storyboard */,
 				4B00BAFD296E8B4C008FB05C /* Assets.xcassets */,
@@ -156,6 +160,97 @@
 				4B00BB17296E8B4D008FB05C /* TMDBUITestsLaunchTests.swift */,
 			);
 			path = TMDBUITests;
+			sourceTree = "<group>";
+		};
+		4B00BB24296E9026008FB05C /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				4B00BAF4296E8B4B008FB05C /* AppDelegate.swift */,
+				4B00BAF6296E8B4B008FB05C /* SceneDelegate.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		4B00BB25296E902A008FB05C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4B00BB2F296E90C8008FB05C /* Shared Api Models */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4B00BB26296E902D008FB05C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4B00BB27296E9031008FB05C /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		4B00BB28296E904E008FB05C /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				4B00BB2A296E9063008FB05C /* Shared Layouts */,
+				4B00BB29296E9054008FB05C /* Specific Layouts */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		4B00BB29296E9054008FB05C /* Specific Layouts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Specific Layouts";
+			sourceTree = "<group>";
+		};
+		4B00BB2A296E9063008FB05C /* Shared Layouts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Shared Layouts";
+			sourceTree = "<group>";
+		};
+		4B00BB2B296E9073008FB05C /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				4B00BB2E296E90A6008FB05C /* Networking */,
+				4B00BB2D296E909E008FB05C /* Networking Domain */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		4B00BB2C296E907C008FB05C /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		4B00BB2D296E909E008FB05C /* Networking Domain */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Networking Domain";
+			sourceTree = "<group>";
+		};
+		4B00BB2E296E90A6008FB05C /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		4B00BB2F296E90C8008FB05C /* Shared Api Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Shared Api Models";
 			sourceTree = "<group>";
 		};
 		C3A457D105558BC9F848BF2C /* Frameworks */ = {
