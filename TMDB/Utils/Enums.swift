@@ -14,11 +14,11 @@ enum HTTPMethod: String {
     case put  = "PUT"
 }
 
-enum ApplicationEndpoint {
+enum ApplicationEndpoint<T, U> {
     case getOrderList(orderStatus : String, userID : Int)
     case getDetailOrderID(orderID : Int)
     case getNearest(longitude : Double, latitude : Double)
-    //case postOrder(order: [AddOrder])
+    case postOrder(T)
     case getPetHotelDetail(petHotelID : Int)
   //  case getListMonitoring(MonitoringBody : MonitoringBody)
   //  case getPetHotelPackage(hotelPackageBody : HotelPackageBody)

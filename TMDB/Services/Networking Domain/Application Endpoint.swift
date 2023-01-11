@@ -23,6 +23,10 @@ extension ApplicationEndpoint: Endpoint {
             return "/public/api/explore/get-nearest-pet-hotel"
         case .getPetHotelDetail:
             return "/public/api/reservation/pet_hotel/detail"
+        case .postOrder(let object as String):
+            return "\(object)"
+        default :
+            return "/test"
         }
     }
 
@@ -36,6 +40,8 @@ extension ApplicationEndpoint: Endpoint {
             return .post
         case .getPetHotelDetail:
             return .post
+        default:
+            return .get
         }
     }
 
@@ -59,6 +65,8 @@ extension ApplicationEndpoint: Endpoint {
             return [
                 "pet_hotel_id" : petHotelID
             ]
+        case .postOrder(let object as String):
+            return nil
         default:
             return nil
         }

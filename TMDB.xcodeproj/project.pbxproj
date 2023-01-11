@@ -25,6 +25,12 @@
 		4B00BB3C296E91E3008FB05C /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B00BB3B296E91E3008FB05C /* Response.swift */; };
 		4B00BB3E296E9225008FB05C /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B00BB3D296E9225008FB05C /* Enums.swift */; };
 		4B00BB40296E92BC008FB05C /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B00BB3F296E92BC008FB05C /* Protocols.swift */; };
+		4B00BB44296ED014008FB05C /* HelperFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B00BB43296ED014008FB05C /* HelperFunction.swift */; };
+		4B00BB46296ED030008FB05C /* ClassExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B00BB45296ED030008FB05C /* ClassExtensions.swift */; };
+		4B00BB48296ED056008FB05C /* SharedObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B00BB47296ED056008FB05C /* SharedObjects.swift */; };
+		4B00BB4B296EEF06008FB05C /* MovieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B00BB49296EEF06008FB05C /* MovieCollectionViewCell.swift */; };
+		4B00BB4C296EEF06008FB05C /* MovieCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B00BB4A296EEF06008FB05C /* MovieCollectionViewCell.xib */; };
+		4B00BB50296EF015008FB05C /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B00BB4F296EF015008FB05C /* NavigationController.swift */; };
 		D1C8B501747B5AA41C508AC6 /* Pods_TMDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4BD726085504D29A4ED7464 /* Pods_TMDB.framework */; };
 		FA8B2705F1C8AAED13453365 /* Pods_TMDB_TMDBUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74F3E8EA27A7C142CBC78505 /* Pods_TMDB_TMDBUITests.framework */; };
 /* End PBXBuildFile section */
@@ -68,6 +74,12 @@
 		4B00BB3B296E91E3008FB05C /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		4B00BB3D296E9225008FB05C /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		4B00BB3F296E92BC008FB05C /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		4B00BB43296ED014008FB05C /* HelperFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperFunction.swift; sourceTree = "<group>"; };
+		4B00BB45296ED030008FB05C /* ClassExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassExtensions.swift; sourceTree = "<group>"; };
+		4B00BB47296ED056008FB05C /* SharedObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedObjects.swift; sourceTree = "<group>"; };
+		4B00BB49296EEF06008FB05C /* MovieCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionViewCell.swift; sourceTree = "<group>"; };
+		4B00BB4A296EEF06008FB05C /* MovieCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieCollectionViewCell.xib; sourceTree = "<group>"; };
+		4B00BB4F296EF015008FB05C /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		4EBE9D90BC946ADB4A0EBC43 /* Pods-TMDB-TMDBUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TMDB-TMDBUITests.debug.xcconfig"; path = "Target Support Files/Pods-TMDB-TMDBUITests/Pods-TMDB-TMDBUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		659CF6327D5DF6271792B42E /* Pods-TMDBTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TMDBTests.debug.xcconfig"; path = "Target Support Files/Pods-TMDBTests/Pods-TMDBTests.debug.xcconfig"; sourceTree = "<group>"; };
 		74F3E8EA27A7C142CBC78505 /* Pods_TMDB_TMDBUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TMDB_TMDBUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -151,9 +163,8 @@
 				4B00BB28296E904E008FB05C /* Components */,
 				4B00BB27296E9031008FB05C /* ViewModels */,
 				4B00BB26296E902D008FB05C /* Views */,
+				4B00BB51296EF02B008FB05C /* Storyboard */,
 				4B00BB2C296E907C008FB05C /* Utils */,
-				4B00BAF8296E8B4B008FB05C /* ViewController.swift */,
-				4B00BAFA296E8B4B008FB05C /* Main.storyboard */,
 				4B00BAFD296E8B4C008FB05C /* Assets.xcassets */,
 				4B00BAFF296E8B4C008FB05C /* LaunchScreen.storyboard */,
 				4B00BB02296E8B4C008FB05C /* Info.plist */,
@@ -198,6 +209,7 @@
 		4B00BB26296E902D008FB05C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4B00BAF8296E8B4B008FB05C /* ViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -228,6 +240,8 @@
 		4B00BB2A296E9063008FB05C /* Shared Layouts */ = {
 			isa = PBXGroup;
 			children = (
+				4B00BB4E296EEFFD008FB05C /* NavigationController */,
+				4B00BB4D296EEF13008FB05C /* MovieCollectionViewCell */,
 			);
 			path = "Shared Layouts";
 			sourceTree = "<group>";
@@ -247,6 +261,9 @@
 			children = (
 				4B00BB3D296E9225008FB05C /* Enums.swift */,
 				4B00BB3F296E92BC008FB05C /* Protocols.swift */,
+				4B00BB43296ED014008FB05C /* HelperFunction.swift */,
+				4B00BB45296ED030008FB05C /* ClassExtensions.swift */,
+				4B00BB47296ED056008FB05C /* SharedObjects.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -275,6 +292,31 @@
 			children = (
 			);
 			path = "Shared Api Models";
+			sourceTree = "<group>";
+		};
+		4B00BB4D296EEF13008FB05C /* MovieCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				4B00BB49296EEF06008FB05C /* MovieCollectionViewCell.swift */,
+				4B00BB4A296EEF06008FB05C /* MovieCollectionViewCell.xib */,
+			);
+			path = MovieCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		4B00BB4E296EEFFD008FB05C /* NavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				4B00BB4F296EF015008FB05C /* NavigationController.swift */,
+			);
+			path = NavigationController;
+			sourceTree = "<group>";
+		};
+		4B00BB51296EF02B008FB05C /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				4B00BAFA296E8B4B008FB05C /* Main.storyboard */,
+			);
+			path = Storyboard;
 			sourceTree = "<group>";
 		};
 		C3A457D105558BC9F848BF2C /* Frameworks */ = {
@@ -399,6 +441,7 @@
 				4B00BB01296E8B4C008FB05C /* LaunchScreen.storyboard in Resources */,
 				4B00BAFE296E8B4C008FB05C /* Assets.xcassets in Resources */,
 				4B00BAFC296E8B4B008FB05C /* Main.storyboard in Resources */,
+				4B00BB4C296EEF06008FB05C /* MovieCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -526,15 +569,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B00BB46296ED030008FB05C /* ClassExtensions.swift in Sources */,
 				4B00BB37296E9197008FB05C /* NetworkLogger.swift in Sources */,
 				4B00BAF9296E8B4B008FB05C /* ViewController.swift in Sources */,
 				4B00BB3A296E91C0008FB05C /* Application Endpoint.swift in Sources */,
+				4B00BB48296ED056008FB05C /* SharedObjects.swift in Sources */,
 				4B00BB40296E92BC008FB05C /* Protocols.swift in Sources */,
 				4B00BAF5296E8B4B008FB05C /* AppDelegate.swift in Sources */,
+				4B00BB44296ED014008FB05C /* HelperFunction.swift in Sources */,
 				4B00BB3C296E91E3008FB05C /* Response.swift in Sources */,
+				4B00BB50296EF015008FB05C /* NavigationController.swift in Sources */,
 				4B00BB31296E913E008FB05C /* NetworkService.swift in Sources */,
 				4B00BB35296E9163008FB05C /* NetworkError.swift in Sources */,
 				4B00BAF7296E8B4B008FB05C /* SceneDelegate.swift in Sources */,
+				4B00BB4B296EEF06008FB05C /* MovieCollectionViewCell.swift in Sources */,
 				4B00BB3E296E9225008FB05C /* Enums.swift in Sources */,
 				4B00BB33296E9153008FB05C /* Endpoint.swift in Sources */,
 			);

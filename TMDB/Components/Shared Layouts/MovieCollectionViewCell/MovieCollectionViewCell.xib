@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="MovieCollectionViewCell" customModule="TMDB" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="174" height="261"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="174" height="261"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="THV-hY-g9s">
+                        <rect key="frame" x="0.0" y="0.0" width="174" height="261"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bAQ-Yh-rPG">
+                                <rect key="frame" x="0.0" y="0.0" width="174" height="261"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="bAQ-Yh-rPG" firstAttribute="top" secondItem="THV-hY-g9s" secondAttribute="top" id="Idp-2W-Khd"/>
+                            <constraint firstAttribute="trailing" secondItem="bAQ-Yh-rPG" secondAttribute="trailing" id="bdb-mx-CJz"/>
+                            <constraint firstItem="bAQ-Yh-rPG" firstAttribute="leading" secondItem="THV-hY-g9s" secondAttribute="leading" id="gRm-yA-FLR"/>
+                            <constraint firstAttribute="bottom" secondItem="bAQ-Yh-rPG" secondAttribute="bottom" id="vLj-BK-dS8"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="THV-hY-g9s" secondAttribute="trailing" id="6w8-uq-MSi"/>
+                <constraint firstAttribute="bottom" secondItem="THV-hY-g9s" secondAttribute="bottom" id="CiX-cc-p6V"/>
+                <constraint firstItem="THV-hY-g9s" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="I66-ff-pvT"/>
+                <constraint firstItem="THV-hY-g9s" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="UlT-eY-6ys"/>
+            </constraints>
+            <size key="customSize" width="203" height="286"/>
+            <connections>
+                <outlet property="movieImageView" destination="bAQ-Yh-rPG" id="Jee-Uw-H9J"/>
+            </connections>
+            <point key="canvasLocation" x="174.80916030534351" y="-63.380281690140848"/>
+        </collectionViewCell>
+    </objects>
+</document>
