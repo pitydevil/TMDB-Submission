@@ -21,3 +21,8 @@ enum genericHandlingError : Int {
     case success         = 200
     case unexpectedError = 500
 }
+
+enum videoHandlingError  {
+    case exist
+    case notExist
+}

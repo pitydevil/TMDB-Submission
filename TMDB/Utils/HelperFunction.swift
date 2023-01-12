@@ -72,7 +72,7 @@ public func createTodayObject() -> String{
 ///     - DateString: string that's converted to date
 public func changeDateFromString(dateString : String) -> Date {
     let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
     let pastDateInvoice: Date? = dateFormatter.date(from: dateString)
     return pastDateInvoice!
 }
@@ -81,6 +81,15 @@ public func changeDateFromString(dateString : String) -> Date {
 /// Returns Error UIAlert Controller
 public func errorAlert() -> UIAlertController {
     let alert = UIAlertController(title: "Reactive Unexpected Error", message: "Please try again later", preferredStyle: .alert)
+    let cancel = UIAlertAction(title: "Ok", style: .cancel)
+    alert.addAction(cancel)
+    return alert
+}
+
+//MARK: - Error Server Alert Function
+/// Returns Error Server UIAlert Controller
+public func errorServerAlert() -> UIAlertController {
+    let alert = UIAlertController(title: "Telah terjadi kesalahan pada server!", message: "Silahkan coba beberapa saat lagi.", preferredStyle: .alert)
     let cancel = UIAlertAction(title: "Ok", style: .cancel)
     alert.addAction(cancel)
     return alert
