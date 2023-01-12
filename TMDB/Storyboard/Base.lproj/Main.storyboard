@@ -83,7 +83,7 @@
                         <outlet property="nowPlayingCard" destination="8Lo-YE-wJy" id="Pcx-fF-5PL"/>
                         <outlet property="topRatedCard" destination="FMg-T4-0Kr" id="Dhi-nR-7nm"/>
                         <outlet property="upcomingCard" destination="agV-t0-Xhl" id="0JD-dS-3cd"/>
-                        <segue destination="JAh-UE-d3n" kind="show" id="Mcc-Gy-h8P"/>
+                        <segue destination="JAh-UE-d3n" kind="show" identifier="identifier1" id="Mcc-Gy-h8P"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -283,7 +283,7 @@
                         <outlet property="starsStackView" destination="LlM-r7-mXT" id="IJv-BP-JBl"/>
                         <outlet property="titleLabel" destination="1hE-ZF-8F2" id="CEq-SK-BDn"/>
                         <outlet property="wkWebView" destination="xaf-7P-COU" id="v59-at-qYN"/>
-                        <segue destination="p1z-qn-2O3" kind="presentation" id="8hu-PW-EPW"/>
+                        <segue destination="p1z-qn-2O3" kind="presentation" identifier="identifier2" id="8hu-PW-EPW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9aH-vG-Jk2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

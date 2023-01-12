@@ -25,25 +25,21 @@ class ReviewTableViewCell: UITableViewCell {
         self.layer.borderWidth  = 1.0
         self.backgroundColor = .clear
     }
-
-    override func layoutSubviews() {
-
-    }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
-    //MARK: - Response Collection View DidSelect Delegate Function
-    /// Returns boolean true or false
-    /// from the given components.
+    //MARK: - Configure Cell
+    /// Configure cell based on review object
     /// - Parameters:
-    ///     - allowedCharacter: character subset that's allowed to use on the textfield
-    ///     - text: set of character/string that would like  to be checked.
+    ///     - Review: object that's gonna be parsed onto the user interfaces
     func configureCell(_ review : Review) {
-        self.authorLabel.text = review.author
-        self.ratingLabel.text = "Rating: \(review.authorDetails.rating ?? 0)"
-        self.contentTextView.text = review.content
-        self.dateLabel.text = changeDateIntoStringDate(Date: changeDateFromString(dateString: review.createdAt))
+        authorLabel.text     = review.author
+        ratingLabel.text     = "Rating: \(review.authorDetails.rating ?? 0)"
+        contentTextView.text = review.content
+        
+        /// Convert String Date into DD-MM-YYYY string format
+        dateLabel.text       = changeDateIntoStringDate(Date: changeDateFromString(dateString: review.createdAt))
     }
 }

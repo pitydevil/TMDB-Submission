@@ -11,7 +11,6 @@ import Foundation
 struct NetworkLogger {
     static func log(request: URLRequest){
         let urlString = request.url?.absoluteString ?? ""
-        print(urlString)
         let components = NSURLComponents(string: urlString)
 
         let method = request.httpMethod ?? ""
@@ -28,7 +27,6 @@ struct NetworkLogger {
             requestLog += "\(key): \(value)\n"
         }
         if let body = request.httpBody {
-           // print("masuk sini test trialsfas? \(body)")
             let bodyString = NSString(data: body, encoding: String.Encoding.utf8.rawValue) ?? "Can't render body, not utf8 encoded"
             requestLog += "\n\(bodyString)\n"
         }
