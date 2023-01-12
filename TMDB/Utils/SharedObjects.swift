@@ -6,3 +6,7 @@
 //
 
 import Foundation
+import RxSwift
+
+public let bags = DisposeBag()
+public let baseImageURL = "https://image.tmdb.org/t/p/w500/"

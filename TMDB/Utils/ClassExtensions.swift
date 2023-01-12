@@ -13,7 +13,7 @@ extension UIView {
     //MARK: - Set Base Rounded View
     /// Change UiView Corner Radius to 8
     func setBaseRoundedView() {
-        self.layer.cornerRadius = 8
+        self.layer.cornerRadius = 16
     }
     
     //MARK: - Set Shadow on View
