@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -282,6 +283,7 @@
                         <outlet property="starsStackView" destination="LlM-r7-mXT" id="IJv-BP-JBl"/>
                         <outlet property="titleLabel" destination="1hE-ZF-8F2" id="CEq-SK-BDn"/>
                         <outlet property="wkWebView" destination="xaf-7P-COU" id="v59-at-qYN"/>
+                        <segue destination="p1z-qn-2O3" kind="presentation" id="8hu-PW-EPW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9aH-vG-Jk2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -310,6 +312,52 @@
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="3.6945812807881775"/>
         </scene>
+        <!--Detail-->
+        <scene sceneID="rQj-zA-SjN">
+            <objects>
+                <viewController storyboardIdentifier="reviewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="p1z-qn-2O3" customClass="ReviewViewController" customModule="TMDB" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="uYx-5s-PL6">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="125" estimatedRowHeight="125" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="caa-wO-Uuu">
+                                <rect key="frame" x="0.0" y="27" width="393" height="756"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YAt-dY-MxW">
+                                <rect key="frame" x="76" y="15" width="241" height="4"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="4" id="BJk-k5-mDr"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="hMB-v6-D7t"/>
+                        <color key="backgroundColor" white="0.095912175076452597" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="caa-wO-Uuu" firstAttribute="trailing" secondItem="hMB-v6-D7t" secondAttribute="trailing" id="IOr-SH-g8p"/>
+                            <constraint firstItem="caa-wO-Uuu" firstAttribute="leading" secondItem="hMB-v6-D7t" secondAttribute="leading" id="ROY-Dz-Y0w"/>
+                            <constraint firstItem="caa-wO-Uuu" firstAttribute="top" secondItem="YAt-dY-MxW" secondAttribute="bottom" constant="8" symbolic="YES" id="ZUv-9m-SCp"/>
+                            <constraint firstItem="YAt-dY-MxW" firstAttribute="top" secondItem="uYx-5s-PL6" secondAttribute="top" constant="15" id="fic-09-29O"/>
+                            <constraint firstItem="YAt-dY-MxW" firstAttribute="centerX" secondItem="uYx-5s-PL6" secondAttribute="centerX" id="gXF-z3-hv3"/>
+                            <constraint firstItem="YAt-dY-MxW" firstAttribute="leading" secondItem="hMB-v6-D7t" secondAttribute="leading" constant="76" id="jV2-JN-sae"/>
+                            <constraint firstAttribute="bottom" secondItem="caa-wO-Uuu" secondAttribute="bottom" id="y3g-7i-pHI"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Detail" id="4jV-W5-osR"/>
+                    <connections>
+                        <outlet property="tableView" destination="caa-wO-Uuu" id="ShC-wy-xfx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GGo-rr-scH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2864.8854961832062" y="0.0"/>
+        </scene>
     </scenes>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

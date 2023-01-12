@@ -18,9 +18,12 @@ class DetailViewController: UIViewController {
     private let movieRecommnedationList   : BehaviorRelay<[Movies]> = BehaviorRelay(value: [])
     private let movieReviewlist   : BehaviorRelay<[Review]> = BehaviorRelay(value: [])
     private var detailController     : DetailViewController?
+    private var reviewController     : ReviewViewController?
+    
+    //MARK: EXTERNAL OBJECT DECLARATION
     let movieIdObject : BehaviorRelay<Int> = BehaviorRelay(value: Int())
     
-    //MARK: - OBJECT OBSERVER DECLARATION
+    //MARK: - EXTERNAL OBJECT OBSERVER DECLARATION
     var movieIdObjectObserver   : Observable<Int> {
         return movieIdObject.asObservable()
     }
@@ -48,6 +51,8 @@ class DetailViewController: UIViewController {
             
         //MARK: - Register Controller
         detailController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "detailViewController") as DetailViewController
+        
+        reviewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "reviewController") as ReviewViewController
         
         //MARK: - Observer for Movie ID OBJECT
         /// Returns boolean true or false
@@ -94,26 +99,6 @@ class DetailViewController: UIViewController {
             self.present(errorAlert(), animated: true)
         }).disposed(by: bags)
         
-        //MARK: - Observer for Handle Video State
-        /// Returns boolean true or false
-        /// from the given components.
-        /// - Parameters:
-        ///     - allowedCharacter: character subset that's allowed to use on the textfield
-        ///     - text: set of character/string that would like  to be checked.
-        detailHomeViewModel.videoHandlingErrorObserver.skip(1).subscribe(onNext: { (value) in
-            DispatchQueue.main.async { [self] in
-                switch value {
-                    case .notExist:
-                        wkWebView.isUserInteractionEnabled = false
-                        wkWebView.backgroundColor = .systemGray6
-                    default:
-                        print("aktif")
-                }
-            }
-        },onError: { error in
-            self.present(errorAlert(), animated: true)
-        }).disposed(by: bags)
-    
         //MARK: - Response Collection View DidSelect Delegate Function
         /// Returns boolean true or false
         /// from the given components.
@@ -160,6 +145,26 @@ class DetailViewController: UIViewController {
             self.present(errorAlert(), animated: true)
         }).disposed(by: bags)
         
+        //MARK: - Observer for Handle Video State
+        /// Returns boolean true or false
+        /// from the given components.
+        /// - Parameters:
+        ///     - allowedCharacter: character subset that's allowed to use on the textfield
+        ///     - text: set of character/string that would like  to be checked.
+        detailHomeViewModel.videoHandlingErrorObserver.skip(1).subscribe(onNext: { (value) in
+            DispatchQueue.main.async { [self] in
+                switch value {
+                    case .notExist:
+                        wkWebView.isUserInteractionEnabled = false
+                        wkWebView.backgroundColor = .systemGray6
+                    default:
+                        print("aktif")
+                }
+            }
+        },onError: { error in
+            self.present(errorAlert(), animated: true)
+        }).disposed(by: bags)
+        
         //MARK: - Bind nowPlayingMoviesList with Table View
         /// Bind journal list with journalingTableView
         movieReviewlist.bind(to: reviewTableView.rx.items(cellIdentifier: ReviewTableViewCell.cellId, cellType: ReviewTableViewCell.self)) { row, model, cell in
@@ -183,8 +188,9 @@ class DetailViewController: UIViewController {
         }).disposed(by: bags)
         
         //MARK: - Response Collection View DidSelect Delegate Function
-        lihatReviewButton.rx.tap.bind {
-            
+        lihatReviewButton.rx.tap.bind { [self] in
+            reviewController?.movieReviewlist.accept(movieReviewlist.value)
+            present(reviewController ?? ReviewViewController(), animated: true)
         }.disposed(by: bags)
     }
     
