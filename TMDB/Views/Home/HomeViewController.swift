@@ -10,6 +10,7 @@ import RxCocoa
 import RxSwift
 import SVProgressHUD
 
+
 class HomeViewController: UIViewController {
 
     //MARK: OBJECT DECLARATION
@@ -17,6 +18,7 @@ class HomeViewController: UIViewController {
     private let topRatedMoviesList : BehaviorRelay<[Movies]> = BehaviorRelay(value: [])
     private let upcomingMoviesList : BehaviorRelay<[Movies]> = BehaviorRelay(value: [])
     private let nowPlayingMoviesList : BehaviorRelay<[Movies]> = BehaviorRelay(value: [])
+    private var detailController     : DetailViewController?
     
     //MARK: LAYOUT SUBVIEWS
     @IBOutlet weak var topRatedCard: CustomViewCollection!
@@ -33,16 +35,17 @@ class HomeViewController: UIViewController {
         }
     }
     
+    //MARK: VIEW DID LOAD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //MARK: - Register Controller
-        topRatedCard.collectionViewLabel.text = "Top Rated Movies"
-        upcomingCard.collectionViewLabel.text = "Upcoming Moives"
+        //MARK: - Instantiate Collection View Label
+        topRatedCard.collectionViewLabel.text   = "Top Rated Movies"
+        upcomingCard.collectionViewLabel.text   = "Upcoming Movies"
         nowPlayingCard.collectionViewLabel.text = "Now Playing Movies"
       
         //MARK: - Register Controller
-      //  detailController = UIStoryboard(name: "Journal", bundle: nil).instantiateViewController(identifier: "detailViewController") as DetailJournalViewController
+        detailController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "detailViewController") as DetailViewController
         
         //MARK: - Bind topRatedMoviesList with Table View
         /// Bind journal list with journalingTableView
@@ -112,9 +115,7 @@ class HomeViewController: UIViewController {
         ///     - allowedCharacter: character subset that's allowed to use on the textfield
         ///     - text: set of character/string that would like  to be checked.
         nowPlayingCard.collectionView.rx.itemSelected.subscribe(onNext: { [self] (indexPath) in
-            nowPlayingCard.collectionView.deselectItem(at: indexPath, animated: true)
-//            detailController?.journalObject = BehaviorRelay(value: Journal())
-//            navigationController?.pushViewController(detailController ?? DetailJournalViewController(), animated: true)
+            responseHandleMovie(nowPlayingMoviesList.value[indexPath.row], indexPath, nowPlayingCard.collectionView)
         }).disposed(by: bags)
         
         //MARK: - Response Collection View DidSelect Delegate Function
@@ -122,9 +123,7 @@ class HomeViewController: UIViewController {
         ///     - allowedCharacter: character subset that's allowed to use on the textfield
         ///     - text: set of character/string that would like  to be checked.
         upcomingCard.collectionView.rx.itemSelected.subscribe(onNext: { [self] (indexPath) in
-            nowPlayingCard.collectionView.deselectItem(at: indexPath, animated: true)
-//            detailController?.journalObject = BehaviorRelay(value: Journal())
-//            navigationController?.pushViewController(detailController ?? DetailJournalViewController(), animated: true)
+            responseHandleMovie(upcomingMoviesList.value[indexPath.row], indexPath, upcomingCard.collectionView)
         }).disposed(by: bags)
         
         //MARK: - Response Collection View DidSelect Delegate Function
@@ -132,9 +131,19 @@ class HomeViewController: UIViewController {
         ///     - allowedCharacter: character subset that's allowed to use on the textfield
         ///     - text: set of character/string that would like  to be checked.
         topRatedCard.collectionView.rx.itemSelected.subscribe(onNext: { [self] (indexPath) in
-            nowPlayingCard.collectionView.deselectItem(at: indexPath, animated: true)
-//            detailController?.journalObject = BehaviorRelay(value: Journal())
-//            navigationController?.pushViewController(detailController ?? DetailJournalViewController(), animated: true)
+            responseHandleMovie(topRatedMoviesList.value[indexPath.row], indexPath,topRatedCard.collectionView)
         }).disposed(by: bags)
+    }
+   
+    //MARK: - Response Collection View DidSelect Delegate Function
+    /// Returns boolean true or false
+    /// from the given components.
+    /// - Parameters:
+    ///     - allowedCharacter: character subset that's allowed to use on the textfield
+    ///     - text: set of character/string that would like  to be checked.
+    private func responseHandleMovie(_ movies: Movies,_ indexPath : IndexPath, _ collectionView: UICollectionView) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+//        detailController
+        navigationController?.pushViewController(detailController ?? DetailViewController(), animated: true)
     }
 }
