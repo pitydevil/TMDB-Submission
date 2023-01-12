@@ -29,22 +29,32 @@ sudo arch -x86_64 gem install ffi
 ```
 sudo arch -x86_64 gem install cocoapod
 ```
-
-### 3. Install project dependency
-
-```
-sudo arch -x86_64 pod install
-```
-
-### 4. Conflict Mitigation If Cocoapod Error
+### 3. Change Directory to your current working directory
 
 ```
-sudo arch -x86_64 pod deintegrate 
-sudo arch -x86_64 pod init
-sudo arch -x86_64 pod install
+cd \your-directory\
+```
+### 4. Remove Podfile.lock file
+
+```
+rm -rf Podfile.lock
 ```
 
-### 5. Commit Message Convention
+### 5. Install project dependency
+
+```
+sudo arch -x86_64 pod install or pod install
+```
+
+### 6. Conflict Mitigation if Cocoapod Error
+
+```
+sudo arch -x86_64 pod deintegrate or pod deintegrate
+sudo arch -x86_64 pod init or pod init
+sudo arch -x86_64 pod install or pod install
+```
+
+### 7. Commit Message Convention
 
 This repository follows [Conventional Commit](https://www.conventionalcommits.org/en/v1.0.0/)
 #### Format
@@ -62,25 +72,25 @@ Contoh: `feat(dashboard): add button`
 - test → update testing
 - perf → fix sesuatu yang bersifat cuma untuk performance issue (derived state, memo)
 
-### 6. Branch Naming Rules
+### 8. Branch Naming Rules
 > - CONTOH NAMING RULES 
 
 - MCTDMB-xx-lorem-ipsum-dolor-amit
 - MCTDMB-xx-MCTDMB-yy-MCTDMB-zz-lorem-ipsum
 
-### 7. Pull Request Title Naming Rules
+### 9. Pull Request Title Naming Rules
 > **IMPORTANT:**
 > - Gunakan Squash & Merge dan mengganti commit sesuai aturan conventional commit pada poin #3 di README
 
 - MCTDMB-xx-lorem-ipsum-dolor-amit
 - MCTDMB-xx-MCTDMB-yy-MCTDMB-zz-lorem-ipsum
 
-### 8. Variable case convention
+### 10. Variable case convention
 - Use `camelCase` for every situation
 - Use `PascalCase` for file name
 - Use 'snake_case' for metadata file
 
-### 9. Directory Structure
+### 11. Directory Structure
 > **IMPORTANT:**
 > - use PascalCase for folder name & View Controller Name
 > - use camelCase for Variables
