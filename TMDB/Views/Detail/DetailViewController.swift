@@ -142,7 +142,10 @@ class DetailViewController: UIViewController {
             /// from the given components.
             detailHomeViewModel.genericHandlingErrorObserver.skip(1).subscribe(onNext: { (value) in
                 DispatchQueue.main.async { [self] in
-                   present(errorServerAlert(), animated: true)
+                    SVProgressHUD.dismiss()
+                    popupAlert(title: "Telah Terjadi Gangguan di Server!", message: nil, actionTitles: ["Hapus"], actionsStyle: [UIAlertAction.Style.cancel] ,actions:[{ [self] (action1) in
+                        dismiss(animated: true)
+                    },nil])
                 }
             },onError: { error in
                 self.present(errorAlert(), animated: true)

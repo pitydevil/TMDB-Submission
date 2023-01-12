@@ -11,7 +11,7 @@ import RxSwift
 import SVProgressHUD
 
 
-class HomeViewController: UIViewController {
+public class HomeViewController: UIViewController {
 
     //MARK: OBJECT DECLARATION
     private let homeViewModel = HomeViewModel()
@@ -26,7 +26,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var nowPlayingCard: CustomViewCollection!
     
     //MARK: VIEW WILL APPEAR
-    override func viewWillAppear(_ animated: Bool) {
+    public override func viewWillAppear(_ animated: Bool) {
         //MARK: - OnAppear Function
         /// Fetch all movies type endpoint from server
         Task {
@@ -36,7 +36,7 @@ class HomeViewController: UIViewController {
     }
     
     //MARK: VIEW DID LOAD
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         
         //MARK: - Instantiate Collection View Label
@@ -126,7 +126,10 @@ class HomeViewController: UIViewController {
             /// from the given components.
             homeViewModel.genericHandlingErrorObserver.skip(1).subscribe(onNext: { (value) in
                 DispatchQueue.main.async { [self] in
-                   present(errorServerAlert(), animated: true)
+                    SVProgressHUD.dismiss()
+                    popupAlert(title: "Telah Terjadi Gangguan di Server!", message: nil, actionTitles: ["Hapus"], actionsStyle: [UIAlertAction.Style.cancel] ,actions:[{ [self] (action1) in
+                        dismiss(animated: true)
+                    },nil])
                 }
             },onError: { error in
                 self.present(errorAlert(), animated: true)
