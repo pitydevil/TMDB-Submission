@@ -118,3 +118,20 @@ Contoh: `feat(dashboard): add button`
   |  |--Extension
   |  |--Helper Class
 ```
+### 12. Screenshots
+
+<p align="center">
+  <img src="https://github.com/pitydevil/TMDB-Submission/blob/main/Images/s1.png">
+</p>
+<p align="center">
+  <img src="https://github.com/pitydevil/TMDB-Submission/blob/main/Images/s2.png">
+</p>
+<p align="center">
+  <img src="https://github.com/pitydevil/TMDB-Submission/blob/main/Images/s3.png">
+</p>
+<p align="center">
+  <img src="https://github.com/pitydevil/TMDB-Submission/blob/main/Images/s4.png">
+</p>
+<p align="center">
+  <img src="https://github.com/pitydevil/TMDB-Submission/blob/main/Images/s5.png">
+</p>
