@@ -8,11 +8,14 @@
 import Foundation
 
 //MARK: - Application Endpoint Enum State
-/// Bind journal list with journalingTableView
-enum ApplicationEndpoint {
+enum ApplicationEndpoint<T> {
     case getNowPlaying
     case getTopRated
     case getUpcoming
+    case getDetailMovie(T)
+    case getDetailMovieReviews(T)
+    case getDetailMovieVideos(T)
+    case getMovieRecommendation(T)
 }
 
 extension ApplicationEndpoint: Endpoint {
@@ -28,6 +31,16 @@ extension ApplicationEndpoint: Endpoint {
             return "/3/movie/top_rated"
         case .getUpcoming:
             return "/3/movie/upcoming"
+        case .getDetailMovie(let movieID as Int):
+            return "/3/movie/\(movieID)"
+        case .getDetailMovieVideos(let movieID as Int):
+            return "/3/movie/\(movieID)/videos"
+        case .getMovieRecommendation(let movieID as Int):
+            return "/3/movie/\(movieID)/similar"
+        case .getDetailMovieReviews(let movieID as Int):
+            return "/3/movie/\(movieID)/reviews"
+        default:
+            return ""
         }
     }
 
@@ -38,6 +51,12 @@ extension ApplicationEndpoint: Endpoint {
         case .getTopRated:
             return .get
         case .getUpcoming:
+            return .get
+        case .getDetailMovie:
+            return .get
+        case .getDetailMovieVideos:
+            return .get
+        default:
             return .get
         }
     }

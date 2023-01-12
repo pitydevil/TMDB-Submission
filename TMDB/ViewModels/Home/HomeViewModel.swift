@@ -11,7 +11,7 @@ import RxSwift
 
 class HomeViewModel {
 
-    //MARK: - INIT OBJECT DECLARATION
+    //MARK: - OBJECT DECLARATION
     private let networkService    : NetworkServicing
     private let nowPlayingMoviesArrayObject   = BehaviorRelay<[Movies]>(value: [])
     private let upcomingMoviesArrayObject   = BehaviorRelay<[Movies]>(value: [])
@@ -73,7 +73,7 @@ class HomeViewModel {
     /// - Parameters:
     ///     - allowedCharacter: character subset that's allowed to use on the textfield
     ///     - text: set of character/string that would like  to be checked.
-    private func fetchMovies(_ enumState : ApplicationEndpoint) async {
+    private func fetchMovies(_ enumState : ApplicationEndpoint<Any>) async {
         let endpoint = enumState
         let result = await networkService.request(to: endpoint, decodeTo: Response<[Movies]>.self)
         switch result {
@@ -86,6 +86,8 @@ class HomeViewModel {
                     topRatedMoviesArrayObject.accept(movies)
                 case .getNowPlaying:
                     nowPlayingMoviesArrayObject.accept(movies)
+                default:
+                    print("else")
                 }
             }
         case .failure(_):

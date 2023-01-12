@@ -18,8 +18,8 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Yoq-pl-dMG">
-                    <rect key="frame" x="16" y="99" width="343" height="679"/>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Yoq-pl-dMG">
+                    <rect key="frame" x="16" y="56" width="375" height="756"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="VNr-lg-ETM">
                         <size key="itemSize" width="174" height="261"/>
@@ -29,7 +29,7 @@
                     </collectionViewFlowLayout>
                 </collectionView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6bC-Ll-CCq">
-                    <rect key="frame" x="16" y="67" width="359" height="24"/>
+                    <rect key="frame" x="16" y="24" width="375" height="24"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
@@ -38,13 +38,13 @@
             <viewLayoutGuide key="safeArea" id="3NR-0p-Dfn"/>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="6bC-Ll-CCq" firstAttribute="leading" secondItem="Yoq-pl-dMG" secondAttribute="leading" id="2g1-90-zN1"/>
-                <constraint firstAttribute="trailing" secondItem="6bC-Ll-CCq" secondAttribute="trailing" id="bCx-Pm-HcB"/>
-                <constraint firstItem="Yoq-pl-dMG" firstAttribute="trailing" secondItem="6q6-Dv-Uz0" secondAttribute="trailingMargin" id="fwv-zb-3tG"/>
-                <constraint firstItem="6bC-Ll-CCq" firstAttribute="top" secondItem="3NR-0p-Dfn" secondAttribute="top" constant="20" id="iqR-zH-ARn"/>
-                <constraint firstItem="Yoq-pl-dMG" firstAttribute="top" secondItem="6bC-Ll-CCq" secondAttribute="bottom" constant="8" symbolic="YES" id="mPK-5e-EcZ"/>
-                <constraint firstItem="6bC-Ll-CCq" firstAttribute="leading" secondItem="6q6-Dv-Uz0" secondAttribute="leadingMargin" id="s5v-N7-gBF"/>
-                <constraint firstItem="Yoq-pl-dMG" firstAttribute="bottom" secondItem="3NR-0p-Dfn" secondAttribute="bottom" id="tzP-fN-LRF"/>
+                <constraint firstAttribute="trailing" secondItem="6bC-Ll-CCq" secondAttribute="trailing" constant="-16" id="CuY-eP-nZP"/>
+                <constraint firstItem="Yoq-pl-dMG" firstAttribute="top" secondItem="6bC-Ll-CCq" secondAttribute="bottom" constant="8" id="EGc-iM-Yg8"/>
+                <constraint firstItem="6bC-Ll-CCq" firstAttribute="top" secondItem="6q6-Dv-Uz0" secondAttribute="top" constant="24" id="FE4-5b-mI6"/>
+                <constraint firstAttribute="bottom" secondItem="Yoq-pl-dMG" secondAttribute="bottom" id="cua-fC-Yfh"/>
+                <constraint firstItem="Yoq-pl-dMG" firstAttribute="leading" secondItem="3NR-0p-Dfn" secondAttribute="leading" constant="16" id="n7i-fj-wFs"/>
+                <constraint firstItem="6bC-Ll-CCq" firstAttribute="leading" secondItem="6q6-Dv-Uz0" secondAttribute="leading" constant="16" id="nSz-rM-zzv"/>
+                <constraint firstAttribute="trailing" secondItem="Yoq-pl-dMG" secondAttribute="trailing" constant="-16" id="si8-oY-Pmf"/>
             </constraints>
             <point key="canvasLocation" x="-994.39999999999998" y="-549.7536945812808"/>
         </view>

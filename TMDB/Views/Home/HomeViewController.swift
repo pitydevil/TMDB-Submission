@@ -104,7 +104,7 @@ class HomeViewController: UIViewController {
         /// - Parameters:
         homeViewModel.genericHandlingErrorObserver.skip(1).subscribe(onNext: { (value) in
             DispatchQueue.main.async { [self] in
-                present(genericAlert(titleAlert: "Telah terjadi kesalahan pada server!", messageAlert: "Silahkan coba beberapa saat lagi.", buttonText: "OK"), animated: true)
+               present(errorServerAlert(), animated: true)
             }
         },onError: { error in
             self.present(errorAlert(), animated: true)
@@ -143,7 +143,7 @@ class HomeViewController: UIViewController {
     ///     - text: set of character/string that would like  to be checked.
     private func responseHandleMovie(_ movies: Movies,_ indexPath : IndexPath, _ collectionView: UICollectionView) {
         collectionView.deselectItem(at: indexPath, animated: true)
-//        detailController
+        detailController?.movieIdObject.accept(movies.id)
         navigationController?.pushViewController(detailController ?? DetailViewController(), animated: true)
     }
 }

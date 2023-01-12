@@ -20,9 +20,16 @@ class ReviewTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.layer.cornerRadius = 16
+        self.layer.borderColor  = UIColor.white.cgColor
+        self.layer.borderWidth  = 1.0
         self.backgroundColor = .clear
     }
 
+    override func layoutSubviews() {
+
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
@@ -33,8 +40,10 @@ class ReviewTableViewCell: UITableViewCell {
     /// - Parameters:
     ///     - allowedCharacter: character subset that's allowed to use on the textfield
     ///     - text: set of character/string that would like  to be checked.
-    func configureCell() {
-        
+    func configureCell(_ review : Review) {
+        self.authorLabel.text = review.author
+        self.ratingLabel.text = "Rating: \(review.authorDetails.rating ?? 0)"
+        self.contentTextView.text = review.content
+        self.dateLabel.text = changeDateIntoStringDate(Date: changeDateFromString(dateString: review.createdAt))
     }
-    
 }
