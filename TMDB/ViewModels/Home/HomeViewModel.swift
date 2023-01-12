@@ -40,26 +40,25 @@ class HomeViewModel {
         self.networkService = networkService
     }
     
-    //MARK: - Fetch Now Playing Function
-    /// Returns boolean true or false
-    /// from the given components.
+    //MARK: - OnAppear Function
+    /// Set task group for all async function on appear for detailViewController
     func onAppear() async {
         await withTaskGroup(of: Void.self) { [weak self] group in
             guard let self = self else { return }
 
-            /// Returns boolean true or false
-            /// from the given components.
+            /// Fetch Now Playing Movie from endpoint
+            /// from given components.
             group.addTask {
                 await self.fetchMovies(.getNowPlaying)
             }
             
-            /// Returns boolean true or false
+            /// Fetch Upcoming Movie from endpoint
             /// from the given components.
             group.addTask { [self] in
                 await self.fetchMovies(.getUpcoming)
             }
             
-            /// Returns boolean true or false
+            /// Fetch Top Rated  Movie from endpoint
             /// from the given components.
             group.addTask { [self] in
                 await self.fetchMovies(.getTopRated)
@@ -67,12 +66,11 @@ class HomeViewModel {
         }
     }
     
-    //MARK: - Fetch Now Playing Function
-    /// Returns boolean true or false
-    /// from the given components.
+    //MARK: - Fetch Movies
+    /// Fetch Movies
+    /// from given components.
     /// - Parameters:
-    ///     - allowedCharacter: character subset that's allowed to use on the textfield
-    ///     - text: set of character/string that would like  to be checked.
+    ///     - enumState: movie type that's gonan be passed onto the fetch movie endpoint
     private func fetchMovies(_ enumState : ApplicationEndpoint<Any>) async {
         let endpoint = enumState
         let result = await networkService.request(to: endpoint, decodeTo: Response<[Movies]>.self)

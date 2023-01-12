@@ -22,13 +22,12 @@ class MovieCollectionViewCell: UICollectionViewCell {
         movieImageView.setBaseRoundedView()
     }
     
-    //MARK: - for Pet Type Value
-    /// Returns boolean true or false
-    /// from the given components.
+    //MARK: - Configure Cell
+    /// Setup Cell
+    /// from the given object
     /// - Parameters:
-    ///     - allowedCharacter: character subset that's allowed to use on the textfield
+    ///     - movies: object that's gonna be setup as the base url string for the poster path.
     func configureCell(_ movies : Movies) {
         movieImageView.sd_setImage(with: URL(string: "\(baseImageURL)\(movies.posterPath)"), placeholderImage: UIImage(named: "placeholderImage") ?? UIImage(data: Data()))
     }
-    
 }

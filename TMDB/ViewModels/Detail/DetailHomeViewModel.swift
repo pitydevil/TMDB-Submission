@@ -51,34 +51,33 @@ class DetailHomeViewModel {
     }
     
     //MARK: - OnAppear Function
-    /// Returns boolean true or false
-    /// from the given components.
+    /// Set task group for all async function on appear for detailViewController
     /// - Parameters:
-    ///     - allowedCharacter: character subset that's allowed to use on the textfield
+    ///     - movieID: id for querying the movie details, recommendation, and movie reviews
     func onAppear(_ movieID : Int) async {
         await withTaskGroup(of: Void.self) { [weak self] group in
             guard let self = self else { return }
 
-            /// Returns boolean true or false
-            /// from the given components.
+            /// Fetch Detail Movie from endpoint
+            /// from given components.
             group.addTask {
                 await self.fetchDetailMovies(movieID)
             }
             
-            /// Returns boolean true or false
-            /// from the given components.
+            /// Fetch Movie Detail Video from endpoint
+            /// from given components.
             group.addTask { [self] in
                 await self.fetchDetailMoviesVideo(movieID)
             }
             
-            /// Returns boolean true or false
-            /// from the given components.
+            /// Fetch Movie Recommendation from endpoint
+            /// from given components.
             group.addTask { [self] in
                 await self.fetchMovieRecommendation(movieID)
             }
             
-            /// Returns boolean true or false
-            /// from the given components.
+            /// Fetch Movie Review from endpoint
+            /// from given components.
             group.addTask { [self] in
                 await self.fetchMovieReviews(movieID)
             }
@@ -86,11 +85,10 @@ class DetailHomeViewModel {
     }
     
     //MARK: - Fetch Movie Detail
-    /// Returns boolean true or false
-    /// from the given components.
+    /// Fetch Detail Movie from endpoint
+    /// from given components.
     /// - Parameters:
-    ///     - allowedCharacter: character subset that's allowed to use on the textfield
-    ///     - text: set of character/string that would like  to be checked.
+    ///     - movieID:  id  for querying the movie details, recommendation, and movie reviews
     private func fetchDetailMovies(_ movieID : Int) async {
         let endpoint = ApplicationEndpoint.getDetailMovie(movieID)
         let result = await networkService.request(to: endpoint, decodeTo: MovieDetails.self)
@@ -103,10 +101,10 @@ class DetailHomeViewModel {
     }
     
     //MARK: - Fetch Movie Videos
-    /// Returns boolean true or false
-    /// from the given components.
+    /// Fetch Movie Video  from endpoint
+    /// from given components.
     /// - Parameters:
-    ///     - allowedCharacter: character subset that's allowed to use on the textfield
+    ///     - movieID:  id  for querying the movie details, recommendation, and movie reviews
     private func fetchDetailMoviesVideo(_ movieID : Int) async {
         let endpoint = ApplicationEndpoint.getDetailMovieVideos(movieID)
         let result = await networkService.request(to: endpoint, decodeTo: Video.self)
@@ -123,10 +121,9 @@ class DetailHomeViewModel {
     }
     
     //MARK: - Fetch Movie Recommendation
-    /// Returns boolean true or false
-    /// from the given components.
+    /// Fetch Movie Recommendation based on MovieID  from endpoint
     /// - Parameters:
-    ///     - allowedCharacter: character subset that's allowed to use on the textfield
+    ///     - movieID:  id  for querying the movie details, recommendation, and movie reviews
     private func fetchMovieRecommendation(_ movieID : Int) async {
         let endpoint = ApplicationEndpoint.getMovieRecommendation(movieID)
         let result = await networkService.request(to: endpoint, decodeTo: Response<[Movies]>.self)
@@ -140,11 +137,10 @@ class DetailHomeViewModel {
         }
     }
     
-    //MARK: - Fetch Movie Recommendation
-    /// Returns boolean true or false
-    /// from the given components.
+    //MARK: - Fetch Movie Reviews
+    /// Fetch Movie Reviews based on MovieID  from endpoint
     /// - Parameters:
-    ///     - allowedCharacter: character subset that's allowed to use on the textfield
+    ///     - movieID:  id  for querying the movie details, recommendation, and movie reviews
     private func fetchMovieReviews(_ movieID : Int) async {
         let endpoint = ApplicationEndpoint.getDetailMovieReviews(movieID)
         let result = await networkService.request(to: endpoint, decodeTo: ResponseReview<Review>.self)

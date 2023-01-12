@@ -7,6 +7,11 @@
 
 import Foundation
 
+//MARK: - NETWORKING PROTOCOL
+protocol NetworkServicing {
+    func request<T: Decodable, E: Endpoint>(to endpoint: E, decodeTo model: T.Type) async -> Result<T, NetworkError>
+}
+
 class NetworkService: NetworkServicing {
     func request<T: Decodable, E: Endpoint>(to endpoint: E, decodeTo model: T.Type) async -> Result<T, NetworkError> {
         guard let urlRequest = endpoint.urlRequest else {
@@ -31,7 +36,7 @@ class NetworkService: NetworkServicing {
                 let decodedData = try JSONDecoder().decode(model, from: data)
                 return .success(decodedData)
             }catch {
-                print("kesini decoding?? \(error)")
+                print("decoding error \(error)")
                 return .failure(.decoding)
             }
 

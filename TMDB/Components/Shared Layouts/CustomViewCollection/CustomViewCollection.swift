@@ -9,6 +9,7 @@ import UIKit
 
 class CustomViewCollection: UIView {
 
+    //MARK: Layout Subviews
     @IBOutlet weak var collectionViewLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     

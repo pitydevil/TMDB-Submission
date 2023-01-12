@@ -24,7 +24,6 @@
 		4B00BB3A296E91C0008FB05C /* Application Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B00BB39296E91C0008FB05C /* Application Endpoint.swift */; };
 		4B00BB3C296E91E3008FB05C /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B00BB3B296E91E3008FB05C /* Response.swift */; };
 		4B00BB3E296E9225008FB05C /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B00BB3D296E9225008FB05C /* Enums.swift */; };
-		4B00BB40296E92BC008FB05C /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B00BB3F296E92BC008FB05C /* Protocols.swift */; };
 		4B00BB44296ED014008FB05C /* HelperFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B00BB43296ED014008FB05C /* HelperFunction.swift */; };
 		4B00BB46296ED030008FB05C /* ClassExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B00BB45296ED030008FB05C /* ClassExtensions.swift */; };
 		4B00BB48296ED056008FB05C /* SharedObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B00BB47296ED056008FB05C /* SharedObjects.swift */; };
@@ -42,7 +41,6 @@
 		4B772D8A296FF1890022B8A7 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B772D89296FF1890022B8A7 /* Video.swift */; };
 		4BE7A068296F0B8400FE4BC4 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE7A067296F0B8400FE4BC4 /* HomeViewModel.swift */; };
 		4BE7A06B296F149A00FE4BC4 /* Movies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE7A06A296F149A00FE4BC4 /* Movies.swift */; };
-		4BE7A06E296F160600FE4BC4 /* Dates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE7A06D296F160600FE4BC4 /* Dates.swift */; };
 		4BE7A073296FD12C00FE4BC4 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE7A072296FD12C00FE4BC4 /* DetailViewController.swift */; };
 		D1C8B501747B5AA41C508AC6 /* Pods_TMDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4BD726085504D29A4ED7464 /* Pods_TMDB.framework */; };
 		FA8B2705F1C8AAED13453365 /* Pods_TMDB_TMDBUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74F3E8EA27A7C142CBC78505 /* Pods_TMDB_TMDBUITests.framework */; };
@@ -86,7 +84,6 @@
 		4B00BB39296E91C0008FB05C /* Application Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Application Endpoint.swift"; sourceTree = "<group>"; };
 		4B00BB3B296E91E3008FB05C /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		4B00BB3D296E9225008FB05C /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
-		4B00BB3F296E92BC008FB05C /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		4B00BB43296ED014008FB05C /* HelperFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperFunction.swift; sourceTree = "<group>"; };
 		4B00BB45296ED030008FB05C /* ClassExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassExtensions.swift; sourceTree = "<group>"; };
 		4B00BB47296ED056008FB05C /* SharedObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedObjects.swift; sourceTree = "<group>"; };
@@ -104,7 +101,6 @@
 		4B772D89296FF1890022B8A7 /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		4BE7A067296F0B8400FE4BC4 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		4BE7A06A296F149A00FE4BC4 /* Movies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movies.swift; sourceTree = "<group>"; };
-		4BE7A06D296F160600FE4BC4 /* Dates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dates.swift; sourceTree = "<group>"; };
 		4BE7A072296FD12C00FE4BC4 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		4EBE9D90BC946ADB4A0EBC43 /* Pods-TMDB-TMDBUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TMDB-TMDBUITests.debug.xcconfig"; path = "Target Support Files/Pods-TMDB-TMDBUITests/Pods-TMDB-TMDBUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		659CF6327D5DF6271792B42E /* Pods-TMDBTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TMDBTests.debug.xcconfig"; path = "Target Support Files/Pods-TMDBTests/Pods-TMDBTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -184,7 +180,6 @@
 			isa = PBXGroup;
 			children = (
 				4B00BB24296E9026008FB05C /* Base */,
-				4B00BB25296E902A008FB05C /* Model */,
 				4B00BB2B296E9073008FB05C /* Services */,
 				4B00BB28296E904E008FB05C /* Components */,
 				4B00BB27296E9031008FB05C /* ViewModels */,
@@ -222,14 +217,6 @@
 				4B00BAF6296E8B4B008FB05C /* SceneDelegate.swift */,
 			);
 			path = Base;
-			sourceTree = "<group>";
-		};
-		4B00BB25296E902A008FB05C /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				4B00BB2F296E90C8008FB05C /* Shared Api Models */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		4B00BB26296E902D008FB05C /* Views */ = {
@@ -282,7 +269,6 @@
 			isa = PBXGroup;
 			children = (
 				4B00BB3D296E9225008FB05C /* Enums.swift */,
-				4B00BB3F296E92BC008FB05C /* Protocols.swift */,
 				4B00BB43296ED014008FB05C /* HelperFunction.swift */,
 				4B00BB45296ED030008FB05C /* ClassExtensions.swift */,
 				4B00BB47296ED056008FB05C /* SharedObjects.swift */,
@@ -307,14 +293,6 @@
 				4B00BB36296E9197008FB05C /* NetworkLogger.swift */,
 			);
 			path = Networking;
-			sourceTree = "<group>";
-		};
-		4B00BB2F296E90C8008FB05C /* Shared Api Models */ = {
-			isa = PBXGroup;
-			children = (
-				4BE7A06D296F160600FE4BC4 /* Dates.swift */,
-			);
-			path = "Shared Api Models";
 			sourceTree = "<group>";
 		};
 		4B00BB4D296EEF13008FB05C /* MovieCollectionViewCell */ = {
@@ -707,12 +685,10 @@
 				4B00BB3A296E91C0008FB05C /* Application Endpoint.swift in Sources */,
 				4BE7A073296FD12C00FE4BC4 /* DetailViewController.swift in Sources */,
 				4B00BB48296ED056008FB05C /* SharedObjects.swift in Sources */,
-				4B00BB40296E92BC008FB05C /* Protocols.swift in Sources */,
 				4B00BAF5296E8B4B008FB05C /* AppDelegate.swift in Sources */,
 				4B772D84296FE5EE0022B8A7 /* MovieDetails.swift in Sources */,
 				4B00BB44296ED014008FB05C /* HelperFunction.swift in Sources */,
 				4B00BB3C296E91E3008FB05C /* Response.swift in Sources */,
-				4BE7A06E296F160600FE4BC4 /* Dates.swift in Sources */,
 				4B00BB50296EF015008FB05C /* NavigationController.swift in Sources */,
 				4B00BB31296E913E008FB05C /* NetworkService.swift in Sources */,
 				4B00BB35296E9163008FB05C /* NetworkError.swift in Sources */,
@@ -905,11 +881,13 @@
 				DEVELOPMENT_TEAM = 38437W4ZU8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TMDB/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -917,9 +895,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tmdb.ujian.TMDB;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -934,11 +915,13 @@
 				DEVELOPMENT_TEAM = 38437W4ZU8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TMDB/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -946,9 +929,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tmdb.ujian.TMDB;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

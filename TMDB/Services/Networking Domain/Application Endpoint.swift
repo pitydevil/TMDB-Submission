@@ -7,7 +7,7 @@
 
 import Foundation
 
-//MARK: - Application Endpoint Enum State
+//MARK: Application Endpoint Enum State
 enum ApplicationEndpoint<T> {
     case getNowPlaying
     case getTopRated
@@ -19,10 +19,13 @@ enum ApplicationEndpoint<T> {
 }
 
 extension ApplicationEndpoint: Endpoint {
+    
+    //MARK: URLRequest Base URL Host Component
     var host: String {
         "api.themoviedb.org"
     }
     
+    //MARK: URLRequest Path Component
     var path: String {
         switch self {
         case .getNowPlaying:
@@ -44,6 +47,7 @@ extension ApplicationEndpoint: Endpoint {
         }
     }
 
+    //MARK: URLRequest Method Component
     var method: HTTPMethod {
         switch self {
         case .getNowPlaying:
@@ -56,11 +60,14 @@ extension ApplicationEndpoint: Endpoint {
             return .get
         case .getDetailMovieVideos:
             return .get
+        case .getDetailMovieReviews:
+            return .get
         default:
             return .get
         }
     }
     
+    //MARK: URLRequest Query Items Component
     var queryItems: [URLQueryItem]? {
         switch self {
         default:
@@ -68,6 +75,7 @@ extension ApplicationEndpoint: Endpoint {
         }
     }
 
+    //MARK: URLRequest Body Component
     var body: [String : Any]? {
         switch self {
         default:

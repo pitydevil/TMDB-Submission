@@ -7,7 +7,18 @@
 
 import Foundation
 
+protocol Endpoint {
+    var host: String { get }
+    var path: String { get }
+    var queryItems: [URLQueryItem]? { get }
+    var method: HTTPMethod { get }
+    var header: [String: String]? { get }
+    var body: [String: Any]? { get }
+}
+
 extension Endpoint {
+    
+    //MARK: Create URLRequest from given URLRequest Components
     var method: HTTPMethod { .get }
     var header: [String: String]? { nil }
     var body: [String: Any]? { nil }
@@ -25,6 +36,7 @@ extension Endpoint {
         urlRequest.httpMethod = method.rawValue
         urlRequest.allHTTPHeaderFields = header
         
+        //MARK: Set JSON type as result value of the Endpoint
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         urlRequest.setValue("application/json", forHTTPHeaderField: "Accept")
         

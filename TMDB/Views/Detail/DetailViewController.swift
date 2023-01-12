@@ -14,9 +14,11 @@ import SVProgressHUD
 class DetailViewController: UIViewController {
 
     //MARK: OBJECT DECLARATION
-    private let detailHomeViewModel = DetailHomeViewModel()
+    private let detailHomeViewModel  = DetailHomeViewModel()
     private let movieRecommnedationList   : BehaviorRelay<[Movies]> = BehaviorRelay(value: [])
-    private let movieReviewlist   : BehaviorRelay<[Review]> = BehaviorRelay(value: [])
+    private let movieReviewlist      : BehaviorRelay<[Review]> = BehaviorRelay(value: [])
+    
+    //MARK: VIEW CONTROLLER OBJECT DECLARATION
     private var detailController     : DetailViewController?
     private var reviewController     : ReviewViewController?
     
@@ -51,157 +53,153 @@ class DetailViewController: UIViewController {
             
         //MARK: - Register Controller
         detailController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "detailViewController") as DetailViewController
+        reviewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "reviewController")     as ReviewViewController
         
-        reviewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "reviewController") as ReviewViewController
-        
-        //MARK: - Observer for Movie ID OBJECT
-        /// Returns boolean true or false
-        /// from the given components.
-        /// - Parameters:
-        movieIdObjectObserver.subscribe(onNext: { [self] (value) in
-            SVProgressHUD.show(withStatus: "Fetching Movies Detail")
-            Task {
-                await detailHomeViewModel.onAppear(value)
-            }
-        },onError: { error in
-            self.present(errorAlert(), animated: true)
-        }).disposed(by: bags)
-        
-        //MARK: - Observer for Movie ID OBJECT
-        /// Returns boolean true or false
-        /// from the given components.
-        /// - Parameters:
-        detailHomeViewModel.detailMovieObjectObserver.subscribe(onNext: { [self] (value) in
-            SVProgressHUD.dismiss()
-            DispatchQueue.main.async { [self] in
-                titleLabel.text = value.title
-                reviewLabel.text = "Reviews: \(value.voteAverage)"
-                descTextview.text = value.overview
-                renderStarReview(value.voteAverage)
-                title = value.title
-            }
-        },onError: { error in
-            self.present(errorAlert(), animated: true)
-        }).disposed(by: bags)
-        
-        //MARK: - Observer for Movie ID OBJECT
-        /// Returns boolean true or false
-        /// from the given components.
-        /// - Parameters:
-        ///     - allowedCharacter: character subset that's allowed to use on the textfield
-        ///     - text: set of character/string that would like  to be checked.
-        detailHomeViewModel.detailMovieVideosObjectObserver.subscribe(onNext: { [self] (value) in
-            DispatchQueue.main.async { [self] in
-                guard let url = URL(string: "https://www.youtube.com/embed/\(value)") else {return}
-                wkWebView.load(URLRequest(url: url))
-            }
-        },onError: { error in
-            self.present(errorAlert(), animated: true)
-        }).disposed(by: bags)
-        
-        //MARK: - Response Collection View DidSelect Delegate Function
-        /// Returns boolean true or false
-        /// from the given components.
-        /// - Parameters:
-        ///     - allowedCharacter: character subset that's allowed to use on the textfield
-        ///     - text: set of character/string that would like  to be checked.
-        detailHomeViewModel.movieRecommendationObjectArrayObserver.subscribe(onNext: { [self] (value) in
-            movieRecommnedationList.accept(value)
-        },onError: { error in
-            self.present(errorAlert(), animated: true)
-        }).disposed(by: bags)
-        
-        //MARK: - Response Collection View DidSelect Delegate Function
-        /// Returns boolean true or false
-        /// from the given components.
-        /// - Parameters:
-        ///     - allowedCharacter: character subset that's allowed to use on the textfield
-        ///     - text: set of character/string that would like  to be checked.
-        detailHomeViewModel.reviewMovieObjectObserver.skip(1).subscribe(onNext: { [self] (value) in
-            movieReviewlist.accept(value)
-            DispatchQueue.main.async { [self] in
-                switch value.isEmpty {
-                    case true:
-                        reviewCountLabel.isHidden = false
-                        lihatReviewButton.isEnabled   = false
-                    case false:
-                        reviewCountLabel.isHidden = true
-                        lihatReviewButton.isEnabled   = true
+        //MARK: Interaction Observer
+            //MARK: - Observer for Movie ID Object
+            /// Observe movie id value changes, once value's changed, trigger view model on appear function
+            /// to fetch from endpoint servers
+            movieIdObjectObserver.subscribe(onNext: { [self] (value) in
+                SVProgressHUD.show(withStatus: "Fetching Movies Detail")
+                Task {
+                    await detailHomeViewModel.onAppear(value)
                 }
-            }
-        },onError: { error in
-            self.present(errorAlert(), animated: true)
-        }).disposed(by: bags)
-        
-        //MARK: - Observer for Error State
-        /// Returns boolean true or false
-        /// from the given components.
-        /// - Parameters:
-        detailHomeViewModel.genericHandlingErrorObserver.skip(1).subscribe(onNext: { (value) in
-            DispatchQueue.main.async { [self] in
-               present(errorServerAlert(), animated: true) 
-            }
-        },onError: { error in
-            self.present(errorAlert(), animated: true)
-        }).disposed(by: bags)
-        
-        //MARK: - Observer for Handle Video State
-        /// Returns boolean true or false
-        /// from the given components.
-        /// - Parameters:
-        ///     - allowedCharacter: character subset that's allowed to use on the textfield
-        ///     - text: set of character/string that would like  to be checked.
-        detailHomeViewModel.videoHandlingErrorObserver.skip(1).subscribe(onNext: { (value) in
-            DispatchQueue.main.async { [self] in
-                switch value {
-                    case .notExist:
-                        wkWebView.isUserInteractionEnabled = false
-                        wkWebView.backgroundColor = .systemGray6
-                    default:
-                        print("aktif")
-                }
-            }
-        },onError: { error in
-            self.present(errorAlert(), animated: true)
-        }).disposed(by: bags)
-        
-        //MARK: - Bind nowPlayingMoviesList with Table View
-        /// Bind journal list with journalingTableView
-        movieReviewlist.bind(to: reviewTableView.rx.items(cellIdentifier: ReviewTableViewCell.cellId, cellType: ReviewTableViewCell.self)) { row, model, cell in
-            cell.configureCell(model)
-        }.disposed(by: bags)
+            },onError: { error in
+                self.present(errorAlert(), animated: true)
+            }).disposed(by: bags)
+            
+            //MARK: - Observer for Detail Movie Object
+            /// Observe detail movie object value, once there's changes update the necessary UI
+            /// from the given components.
+            detailHomeViewModel.detailMovieObjectObserver.subscribe(onNext: { [self] (value) in
+                SVProgressHUD.dismiss()
+                DispatchQueue.main.async { [self] in
+                    title = value.title
+                    titleLabel.text   = value.title
+                    reviewLabel.text  = "Reviews: \(value.voteAverage)"
+                    descTextview.text = value.overview
 
-        //MARK: - Bind nowPlayingMoviesList with Table View
-        /// Bind journal list with journalingTableView
-        movieRecommnedationList.bind(to: recommendationCard.collectionView.rx.items(cellIdentifier: MovieCollectionViewCell.cellID, cellType: MovieCollectionViewCell.self)) { row, model, cell in
-            cell.configureCell(model)
-        }.disposed(by: bags)
+                    //MARK: - Render Star Review Function
+                    /// Update stackview Ui to update the amount of review stars
+                    /// from the given components.
+                    renderStarReview(value.voteAverage)
+                }
+            },onError: { error in
+                self.present(errorAlert(), animated: true)
+            }).disposed(by: bags)
+            
+            //MARK: - Observer Movie's trailer
+            /// Update WkWebView URL  based on  movie's trailer endpoint
+            /// from the given components.
+            detailHomeViewModel.detailMovieVideosObjectObserver.subscribe(onNext: { [self] (value) in
+                DispatchQueue.main.async { [self] in
+                    guard let url = URL(string: "https://www.youtube.com/embed/\(value)") else {return}
+                    wkWebView.load(URLRequest(url: url))
+                }
+            },onError: { error in
+                self.present(errorAlert(), animated: true)
+            }).disposed(by: bags)
         
-        //MARK: - Response Collection View DidSelect Delegate Function
-        /// - Parameters:
-        ///     - allowedCharacter: character subset that's allowed to use on the textfield
-        ///     - text: set of character/string that would like  to be checked.
-        recommendationCard.collectionView.rx.itemSelected.subscribe(onNext: { [self] (indexPath) in
-            recommendationCard.collectionView.deselectItem(at: indexPath, animated: true)
-            detailController?.movieIdObject.accept(movieRecommnedationList.value[indexPath.row].id)
-            navigationController?.pushViewController(detailController ?? DetailViewController(), animated: true)
-        }).disposed(by: bags)
+            //MARK: - Observer for Review Table View
+            /// Update Review Table View based on review Array Count
+            /// from the given components.
+            detailHomeViewModel.reviewMovieObjectObserver.skip(1).subscribe(onNext: { [self] (value) in
+                movieReviewlist.accept(value)
+                DispatchQueue.main.async { [self] in
+                    switch value.isEmpty {
+                        case true:
+                            reviewCountLabel.isHidden = false
+                            lihatReviewButton.isEnabled   = false
+                        case false:
+                            reviewCountLabel.isHidden = true
+                            lihatReviewButton.isEnabled   = true
+                    }
+                }
+            },onError: { error in
+                self.present(errorAlert(), animated: true)
+            }).disposed(by: bags)
         
-        //MARK: - Response Collection View DidSelect Delegate Function
-        lihatReviewButton.rx.tap.bind { [self] in
-            reviewController?.movieReviewlist.accept(movieReviewlist.value)
-            present(reviewController ?? ReviewViewController(), animated: true)
-        }.disposed(by: bags)
+            //MARK: - Lihat Semua Review Response Function
+            /// Segue to review view controller to view all of the movie review.
+            lihatReviewButton.rx.tap.bind { [self] in
+                reviewController?.movieReviewlist.accept(movieReviewlist.value)
+                present(reviewController ?? ReviewViewController(), animated: true)
+            }.disposed(by: bags)
+        
+        //MARK: - Object Observer for UI Logic.
+            //MARK: - Observe Movie Recommendation List Value from Endpoint
+            /// Returns boolean true or false
+            /// from the given components.
+            detailHomeViewModel.movieRecommendationObjectArrayObserver.subscribe(onNext: { [self] (value) in
+                movieRecommnedationList.accept(value)
+            },onError: { error in
+                self.present(errorAlert(), animated: true)
+            }).disposed(by: bags)
+            
+        //MARK: - Observer for Endpoint Error State
+            //MARK: - Observer for Handling Error on all endpoints
+            /// Inform user if there's any problem with their internet connection via UIAlertController
+            /// from the given components.
+            detailHomeViewModel.genericHandlingErrorObserver.skip(1).subscribe(onNext: { (value) in
+                DispatchQueue.main.async { [self] in
+                   present(errorServerAlert(), animated: true)
+                }
+            },onError: { error in
+                self.present(errorAlert(), animated: true)
+            }).disposed(by: bags)
+        
+            //MARK: - Observer for Handling Movie Video Endpoint
+            /// Update user Interface if there's no trailer for the details movie.
+            /// from the given components.
+            /// - Parameters:
+            ///     - notExist: video trailer doesn't exist for current selected movie details.
+            detailHomeViewModel.videoHandlingErrorObserver.skip(1).subscribe(onNext: { (value) in
+                DispatchQueue.main.async { [self] in
+                    switch value {
+                        case .notExist:
+                            wkWebView.isUserInteractionEnabled = false
+                            wkWebView.backgroundColor = .systemGray6
+                        default:
+                            print("aktif")
+                    }
+                }
+            },onError: { error in
+                self.present(errorAlert(), animated: true)
+            }).disposed(by: bags)
+        
+        //MARK: - TableView Datasource and Delegate Functions
+            //MARK: - Bind Movie Review List with Review Table View
+            /// Bind Movie Review List with the review table view
+            movieReviewlist.bind(to: reviewTableView.rx.items(cellIdentifier: ReviewTableViewCell.cellId, cellType: ReviewTableViewCell.self)) { row, model, cell in
+                /// Configure Table View cell based on review object.
+                cell.configureCell(model)
+            }.disposed(by: bags)
+
+            //MARK: - Bind Movie Recommendation List with Recommendation Card's collection view
+            /// Bind Recommendation List with Recommendation Card's collection view
+            movieRecommnedationList.bind(to: recommendationCard.collectionView.rx.items(cellIdentifier: MovieCollectionViewCell.cellID, cellType: MovieCollectionViewCell.self)) { row, model, cell in
+                /// Configure collection view  cell based on movie recommendation object.
+                cell.configureCell(model)
+            }.disposed(by: bags)
+            
+            //MARK: - Collection View Did Select Delegate Function
+            /// Response Collection View Did Select Function, and segue to detail view controller based on user movie's id.
+            recommendationCard.collectionView.rx.itemSelected.subscribe(onNext: { [self] (indexPath) in
+                recommendationCard.collectionView.deselectItem(at: indexPath, animated: true)
+                detailController?.movieIdObject.accept(movieRecommnedationList.value[indexPath.row].id)
+                navigationController?.pushViewController(detailController ?? DetailViewController(), animated: true)
+            }).disposed(by: bags)
     }
     
     //MARK: - Render Star Review
-    /// Returns boolean true or false
+    /// Render Star based on user review
     /// from the given components.
     /// - Parameters:
-    ///     - allowedCharacter: character subset that's allowed to use on the textfield
-    ///     - text: set of character/string that would like  to be checked.
+    ///     - voteAverage: vote average value from users input.
     private func renderStarReview(_ voteAverage : Double) {
+        /// Remove All Star ImageView from superview
         starsStackView.arrangedSubviews.forEach {$0.removeFromSuperview()}
+        /// Add Star based on user vote
         for _ in 0...Int(voteAverage/2.0) {
             let imageView = UIImageView()
             imageView.image = UIImage(systemName: "star.fill")
