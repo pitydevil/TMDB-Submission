@@ -1,5 +1,5 @@
 <div align="center">
-  <h2>Fluffy</h2>
+  <h2>TMDB Submission</h2>
 </div>
 
 ## Features
@@ -13,6 +13,7 @@ This repository ispacked with:
 -   Cocoapods 1.13
 -   SVProgressHUD
 -   IQKeyboardManagerSwift
+-   Xcode Version 14.1
 
 # Getting Started
 
@@ -93,15 +94,15 @@ Contoh: `feat(dashboard): add button`
   |--Providers
   |  |--Base Provider
   |--Components
-  |  |--SpecificLayout
   |  |--SharedLayout
   |--Miscellaneous
   |--Model
   |  |--Class Model
-  |  |--API Model
   |--ViewModel
   |--Views
   |  |--home
+  |  |-----|Domain
+  |  |-----------|Response
   |  |--anotherpage
   |--Utils
   |  |--Extension
