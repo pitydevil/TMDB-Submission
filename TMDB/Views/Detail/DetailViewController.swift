@@ -144,7 +144,7 @@ class DetailViewController: UIViewController {
                 DispatchQueue.main.async { [self] in
                     SVProgressHUD.dismiss()
                     popupAlert(title: "Telah Terjadi Gangguan di Server!", message: "Silahkan coba beberapa saat lagi.", actionTitles: ["OK"], actionsStyle: [UIAlertAction.Style.cancel] ,actions:[{ [self] (action1) in
-                        dismiss(animated: true)
+                        navigationController!.popToRootViewController(animated: true)
                     },nil])
                 }
             },onError: { error in
