@@ -71,7 +71,7 @@ extension ApplicationEndpoint: Endpoint {
     var queryItems: [URLQueryItem]? {
         switch self {
         default:
-            return [URLQueryItem(name: "api_key", value: "b5ee67fe1eff1362576110a40fa40c25"), URLQueryItem(name: "language", value: "en-US"), URLQueryItem(name: "page", value: "1")]
+            return [URLQueryItem(name: "api_key", value: apiKey)]
         }
     }
 

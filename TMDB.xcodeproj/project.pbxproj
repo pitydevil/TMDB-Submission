@@ -32,6 +32,7 @@
 		4B00BB50296EF015008FB05C /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B00BB4F296EF015008FB05C /* NavigationController.swift */; };
 		4B3D3474296FFD2A00FD0C77 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3D3473296FFD2A00FD0C77 /* Review.swift */; };
 		4B3D34772970127200FD0C77 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3D34762970127200FD0C77 /* ReviewViewController.swift */; };
+		4B3D3479297041DC00FD0C77 /* TMDB-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4B3D3478297041DC00FD0C77 /* TMDB-Info.plist */; };
 		4B6A04DE296EF85400C23FB8 /* CustomViewCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6A04DA296EF85400C23FB8 /* CustomViewCollection.swift */; };
 		4B6A04E0296EF87300C23FB8 /* CustomViewCollection.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B6A04DF296EF87300C23FB8 /* CustomViewCollection.xib */; };
 		4B772D7E296FDE170022B8A7 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B772D7C296FDE170022B8A7 /* ReviewTableViewCell.swift */; };
@@ -92,6 +93,7 @@
 		4B00BB4F296EF015008FB05C /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		4B3D3473296FFD2A00FD0C77 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		4B3D34762970127200FD0C77 /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
+		4B3D3478297041DC00FD0C77 /* TMDB-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TMDB-Info.plist"; sourceTree = "<group>"; };
 		4B6A04DA296EF85400C23FB8 /* CustomViewCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomViewCollection.swift; sourceTree = "<group>"; };
 		4B6A04DF296EF87300C23FB8 /* CustomViewCollection.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomViewCollection.xib; sourceTree = "<group>"; };
 		4B772D7C296FDE170022B8A7 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 				4B00BAFD296E8B4C008FB05C /* Assets.xcassets */,
 				4B00BAFF296E8B4C008FB05C /* LaunchScreen.storyboard */,
 				4B00BB02296E8B4C008FB05C /* Info.plist */,
+				4B3D3478297041DC00FD0C77 /* TMDB-Info.plist */,
 			);
 			path = TMDB;
 			sourceTree = "<group>";
@@ -548,6 +551,7 @@
 				4B00BAFE296E8B4C008FB05C /* Assets.xcassets in Resources */,
 				4B772D7F296FDE170022B8A7 /* ReviewTableViewCell.xib in Resources */,
 				4B00BAFC296E8B4B008FB05C /* Main.storyboard in Resources */,
+				4B3D3479297041DC00FD0C77 /* TMDB-Info.plist in Resources */,
 				4B00BB4C296EEF06008FB05C /* MovieCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
