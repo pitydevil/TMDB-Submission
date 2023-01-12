@@ -127,7 +127,7 @@ public class HomeViewController: UIViewController {
             homeViewModel.genericHandlingErrorObserver.skip(1).subscribe(onNext: { (value) in
                 DispatchQueue.main.async { [self] in
                     SVProgressHUD.dismiss()
-                    popupAlert(title: "Telah Terjadi Gangguan di Server!", message: nil, actionTitles: ["Hapus"], actionsStyle: [UIAlertAction.Style.cancel] ,actions:[{ [self] (action1) in
+                    popupAlert(title: "Telah Terjadi Gangguan di Server!", message: "Silahkan coba beberapa saat lagi.", actionTitles: ["OK"], actionsStyle: [UIAlertAction.Style.cancel] ,actions:[{ [self] (action1) in
                         dismiss(animated: true)
                     },nil])
                 }
