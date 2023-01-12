@@ -14,18 +14,6 @@ enum HTTPMethod: String {
     case put  = "PUT"
 }
 
-enum ApplicationEndpoint<T, U> {
-    case getOrderList(orderStatus : String, userID : Int)
-    case getDetailOrderID(orderID : Int)
-    case getNearest(longitude : Double, latitude : Double)
-    case postOrder(T)
-    case getPetHotelDetail(petHotelID : Int)
-  //  case getListMonitoring(MonitoringBody : MonitoringBody)
-  //  case getPetHotelPackage(hotelPackageBody : HotelPackageBody)
- //   case getSearchListPetHotel(exploreSearchBody : ExploreSearchBody)
-//    case getOrderAdd(order : OrderAdd)
-}
-
 enum genericHandlingError : Int {
     case objectNotFound  = 404
     case methodNotFound  = 405

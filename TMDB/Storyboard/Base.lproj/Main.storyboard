@@ -10,14 +10,67 @@
         <!--Home-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="TMDB" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="HomeViewController" customModule="TMDB" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fF5-Md-B00">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lt0-cE-u3B">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="900"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="agV-t0-Xhl" customClass="CustomViewCollection" customModule="TMDB" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Lo-YE-wJy" customClass="CustomViewCollection" customModule="TMDB" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="298" width="375" height="300"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FMg-T4-0Kr" customClass="CustomViewCollection" customModule="TMDB" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="600" width="375" height="300"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="900" id="hBT-Vt-dKr"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="lt0-cE-u3B" firstAttribute="leading" secondItem="fF5-Md-B00" secondAttribute="leading" id="1jk-3C-5gg"/>
+                                    <constraint firstAttribute="trailing" secondItem="lt0-cE-u3B" secondAttribute="trailing" id="68j-Ft-3of"/>
+                                    <constraint firstItem="lt0-cE-u3B" firstAttribute="top" secondItem="fF5-Md-B00" secondAttribute="top" id="Rv5-L3-YAx"/>
+                                    <constraint firstAttribute="bottom" secondItem="lt0-cE-u3B" secondAttribute="bottom" constant="-7" id="lkG-rh-CjO"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="fF5-Md-B00" secondAttribute="bottom" constant="-34" id="Aga-dU-2sk"/>
+                            <constraint firstItem="fF5-Md-B00" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="-91" id="B3o-Fl-dnA"/>
+                            <constraint firstItem="fF5-Md-B00" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="-91" id="DaE-SS-LHm"/>
+                            <constraint firstItem="fF5-Md-B00" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="LUO-oo-F2G"/>
+                            <constraint firstItem="fF5-Md-B00" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="U4y-Sn-apk"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="fF5-Md-B00" secondAttribute="trailing" id="bDr-q5-g0s"/>
+                            <constraint firstItem="fF5-Md-B00" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="34" id="ctX-Ql-o62"/>
+                            <constraint firstItem="fF5-Md-B00" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="wqa-bR-Mid"/>
+                            <constraint firstItem="lt0-cE-u3B" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="yAl-f6-ZNQ"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="IdQ-VY-W5G"/>
+                    <connections>
+                        <outlet property="nowPlayingCard" destination="8Lo-YE-wJy" id="Pcx-fF-5PL"/>
+                        <outlet property="topRatedCard" destination="FMg-T4-0Kr" id="Dhi-nR-7nm"/>
+                        <outlet property="upcomingCard" destination="agV-t0-Xhl" id="0JD-dS-3cd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

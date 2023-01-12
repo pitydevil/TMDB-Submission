@@ -24,13 +24,14 @@ class NetworkService: NetworkServicing {
             }
         
             #if DEBUG
-        //    NetworkLogger.log(data: data, response: response)
+            NetworkLogger.log(data: data, response: response)
             #endif
             
             do {
                 let decodedData = try JSONDecoder().decode(model, from: data)
                 return .success(decodedData)
             }catch {
+                print("kesini decoding?? \(error)")
                 return .failure(.decoding)
             }
 

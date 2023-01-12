@@ -7,66 +7,50 @@
 
 import Foundation
 
+//MARK: - Application Endpoint Enum State
+/// Bind journal list with journalingTableView
+enum ApplicationEndpoint {
+    case getNowPlaying
+    case getTopRated
+    case getUpcoming
+}
 
 extension ApplicationEndpoint: Endpoint {
     var host: String {
-        "www.fluffy.umkmbedigital.com"
+        "api.themoviedb.org"
     }
-
+    
     var path: String {
         switch self {
-        case .getOrderList:
-            return "/public/api/reservation/order/list"
-        case .getDetailOrderID:
-            return "/public/api/reservation/order/detail"
-        case .getNearest:
-            return "/public/api/explore/get-nearest-pet-hotel"
-        case .getPetHotelDetail:
-            return "/public/api/reservation/pet_hotel/detail"
-        case .postOrder(let object as String):
-            return "\(object)"
-        default :
-            return "/test"
+        case .getNowPlaying:
+            return "/3/movie/now_playing"
+        case .getTopRated:
+            return "/3/movie/top_rated"
+        case .getUpcoming:
+            return "/3/movie/upcoming"
         }
     }
 
     var method: HTTPMethod {
         switch self {
-        case .getOrderList:
-            return .post
-        case .getDetailOrderID:
-            return .post
-        case .getNearest:
-            return .post
-        case .getPetHotelDetail:
-            return .post
-        default:
+        case .getNowPlaying:
             return .get
+        case .getTopRated:
+            return .get
+        case .getUpcoming:
+            return .get
+        }
+    }
+    
+    var queryItems: [URLQueryItem]? {
+        switch self {
+        default:
+            return [URLQueryItem(name: "api_key", value: "b5ee67fe1eff1362576110a40fa40c25"), URLQueryItem(name: "language", value: "en-US"), URLQueryItem(name: "page", value: "1")]
         }
     }
 
     var body: [String : Any]? {
         switch self {
-        case .getOrderList(let orderStatus, let userID):
-            return [
-                "order_status" : orderStatus,
-                "user_id"      : userID
-            ]
-        case .getDetailOrderID(let orderID):
-            return [
-                "order_id" : orderID
-            ]
-        case .getNearest(let longitude, let latitude):
-            return [
-                "longitude" : longitude,
-                "latitude"  : latitude
-            ]
-        case .getPetHotelDetail(let petHotelID):
-            return [
-                "pet_hotel_id" : petHotelID
-            ]
-        case .postOrder(let object as String):
-            return nil
         default:
             return nil
         }
