@@ -8,7 +8,7 @@
 import Foundation
 
 struct Movies : Decodable{
-    let posterPath: String
+    let posterPath: String?
     let adult: Bool
     let overview : String
     let genreIDS: [Int]
@@ -38,7 +38,7 @@ extension Movies {
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        posterPath   = try container.decode(String.self, forKey: .posterPath)
+        posterPath   = try container.decode(String?.self, forKey: .posterPath)
         adult = try container.decode(Bool.self, forKey: .adult)
         overview = try container.decode(String.self, forKey: .overview)
         genreIDS = try container.decode([Int].self, forKey: .genreIDS)

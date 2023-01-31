@@ -9,9 +9,8 @@ import Foundation
 
 //MARK: Application Endpoint Enum State
 enum ApplicationEndpoint<T> {
-    case getNowPlaying
-    case getTopRated
-    case getUpcoming
+    case getGenres
+    case getDiscover(T)
     case getDetailMovie(T)
     case getDetailMovieReviews(T)
     case getDetailMovieVideos(T)
@@ -28,12 +27,8 @@ extension ApplicationEndpoint: Endpoint {
     //MARK: URLRequest Path Component
     var path: String {
         switch self {
-        case .getNowPlaying:
-            return "/3/movie/now_playing"
-        case .getTopRated:
-            return "/3/movie/top_rated"
-        case .getUpcoming:
-            return "/3/movie/upcoming"
+        case .getDiscover:
+            return "/3/discover/movie"
         case .getDetailMovie(let movieID as Int):
             return "/3/movie/\(movieID)"
         case .getDetailMovieVideos(let movieID as Int):
@@ -42,6 +37,8 @@ extension ApplicationEndpoint: Endpoint {
             return "/3/movie/\(movieID)/similar"
         case .getDetailMovieReviews(let movieID as Int):
             return "/3/movie/\(movieID)/reviews"
+        case .getGenres:
+            return "/3/genre/movie/list"
         default:
             return ""
         }
@@ -50,17 +47,15 @@ extension ApplicationEndpoint: Endpoint {
     //MARK: URLRequest Method Component
     var method: HTTPMethod {
         switch self {
-        case .getNowPlaying:
-            return .get
-        case .getTopRated:
-            return .get
-        case .getUpcoming:
+        case .getDiscover:
             return .get
         case .getDetailMovie:
             return .get
         case .getDetailMovieVideos:
             return .get
         case .getDetailMovieReviews:
+            return .get
+        case .getGenres:
             return .get
         default:
             return .get
@@ -70,6 +65,8 @@ extension ApplicationEndpoint: Endpoint {
     //MARK: URLRequest Query Items Component
     var queryItems: [URLQueryItem]? {
         switch self {
+        case .getDiscover(let genreBody as GenreBody):
+            return [URLQueryItem(name: "api_key", value: apiKey), URLQueryItem(name: "page", value: String(genreBody.page)), URLQueryItem(name: "with_genres", value: genreBody.genresName)]
         default:
             return [URLQueryItem(name: "api_key", value: apiKey)]
         }

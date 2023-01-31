@@ -13,22 +13,17 @@ class HomeViewModel {
 
     //MARK: - OBJECT DECLARATION
     private let networkService    : NetworkServicing
-    private let nowPlayingMoviesArrayObject   = BehaviorRelay<[Movies]>(value: [])
-    private let upcomingMoviesArrayObject   = BehaviorRelay<[Movies]>(value: [])
-    private let topRatedMoviesArrayObject   = BehaviorRelay<[Movies]>(value: [])
+    private let genresMoviesArrayObject   = BehaviorRelay<[Genres]>(value: [])
     private var genericHandlingErrorObject = BehaviorRelay<genericHandlingError>(value: .success)
+    let discoverMoviesArrayObject   = BehaviorRelay<[Movies]>(value: [])
     
     //MARK: - OBJECT OBSERVER DECLARATION
-    var nowPlayingMoviesArrayObjectObserver   : Observable<[Movies]> {
-        return nowPlayingMoviesArrayObject.asObservable()
+    var discoverMoviesArrayObjectObserver   : Observable<[Movies]> {
+        return discoverMoviesArrayObject.asObservable()
     }
     
-    var topRatedMoviesArrayObjectObserver   : Observable<[Movies]> {
-        return topRatedMoviesArrayObject.asObservable()
-    }
-    
-    var upcomingMoviesArrayObjectObserver   : Observable<[Movies]> {
-        return upcomingMoviesArrayObject.asObservable()
+    var genresArrayObjectObserver   : Observable<[Genres]> {
+        return genresMoviesArrayObject.asObservable()
     }
     
     var genericHandlingErrorObserver   : Observable<genericHandlingError> {
@@ -42,54 +37,67 @@ class HomeViewModel {
     
     //MARK: - OnAppear Function
     /// Set task group for all async function on appear for detailViewController
-    func onAppear() async {
+    func onAppear(_ genreBody : GenreBody) async {
         await withTaskGroup(of: Void.self) { [weak self] group in
             guard let self = self else { return }
-
-            /// Fetch Now Playing Movie from endpoint
-            /// from given components.
-            group.addTask {
-                await self.fetchMovies(.getNowPlaying)
-            }
             
             /// Fetch Upcoming Movie from endpoint
             /// from the given components.
             group.addTask { [self] in
-                await self.fetchMovies(.getUpcoming)
+                await self.fetchMovies(genreBody)
             }
             
             /// Fetch Top Rated  Movie from endpoint
             /// from the given components.
             group.addTask { [self] in
-                await self.fetchMovies(.getTopRated)
+                await self.fetchGenres()
             }
         }
     }
     
+    //MARK: - Fetch Genres
+    /// Fetch Genres
+    /// from given components.
+    private func fetchGenres() async {
+        let endpoint = ApplicationEndpoint<Any>.getGenres
+        let result = await networkService.request(to: endpoint, decodeTo: Genre.self)
+        switch result {
+        case .success(let response):
+            genresMoviesArrayObject.accept(response.genres)
+        case .failure(_):
+            genericHandlingErrorObject.accept(genericHandlingError(rawValue: 500)!)
+        }
+    }
+
     //MARK: - Fetch Movies
     /// Fetch Movies
     /// from given components.
     /// - Parameters:
     ///     - enumState: movie type that's gonan be passed onto the fetch movie endpoint
-    private func fetchMovies(_ enumState : ApplicationEndpoint<Any>) async {
-        let endpoint = enumState
+    func fetchMovies(_ genreObject : GenreBody) async {
+        let endpoint = ApplicationEndpoint.getDiscover(genreObject)
         let result = await networkService.request(to: endpoint, decodeTo: Response<[Movies]>.self)
         switch result {
         case .success(let response):
             if let movies = response.results {
-                switch enumState {
-                case .getUpcoming:
-                    upcomingMoviesArrayObject.accept(movies)
-                case .getTopRated:
-                    topRatedMoviesArrayObject.accept(movies)
-                case .getNowPlaying:
-                    nowPlayingMoviesArrayObject.accept(movies)
-                default:
-                    print("else")
-                }
+                var appendedMovies = discoverMoviesArrayObject.value
+                appendedMovies.append(contentsOf: movies)
+                discoverMoviesArrayObject.accept(appendedMovies)
             }
         case .failure(_):
             genericHandlingErrorObject.accept(genericHandlingError(rawValue: 500)!)
         }
+    }
+    
+    //MARK: - Determine ScrollView Position
+    /// Determine scrollview position
+    /// from given components.
+    /// - Parameters:
+    ///     - scrollView
+    func determineScrollViewPosition(_ scrollView : UIScrollView) -> Bool {
+        let height = scrollView.frame.width
+        let contentSizeHeight = scrollView.contentSize.width
+        let offset = scrollView.contentOffset.x
+        return (offset + height == contentSizeHeight)
     }
 }

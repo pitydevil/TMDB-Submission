@@ -51,7 +51,7 @@ extension Review  {
 // MARK: - AuthorDetails
 struct AuthorDetails: Decodable {
     let name, username: String
-    let rating: Int?
+    let rating: Double?
 }
 
 extension AuthorDetails {
@@ -64,6 +64,6 @@ extension AuthorDetails {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         name    = try container.decode(String.self, forKey: .name)
         username   =  try container.decode(String.self, forKey: .username)
-        rating   =  try container.decode(Int?.self, forKey: .rating)
+        rating   =  try container.decode(Double?.self, forKey: .rating)
     }
 }

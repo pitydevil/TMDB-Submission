@@ -8,7 +8,7 @@
 import Foundation
 
 struct MovieDetails : Decodable{
-    let backdropPath: String
+    let backdropPath: String?
     let budget: Int
     let originalLanguage, originalTitle, overview: String
     let popularity: Double
@@ -51,7 +51,7 @@ extension MovieDetails  {
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        backdropPath   = try container.decode(String.self, forKey: .backdropPath)
+        backdropPath   = try container.decode(String?.self, forKey: .backdropPath)
         budget = try container.decode(Int.self, forKey: .budget)
         originalTitle = try container.decode(String.self, forKey: .originalTitle)
         originalLanguage = try container.decode(String.self, forKey: .originalLanguage)

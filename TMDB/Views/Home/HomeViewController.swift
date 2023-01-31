@@ -15,15 +15,16 @@ public class HomeViewController: UIViewController {
 
     //MARK: OBJECT DECLARATION
     private let homeViewModel = HomeViewModel()
-    private let topRatedMoviesList : BehaviorRelay<[Movies]> = BehaviorRelay(value: [])
-    private let upcomingMoviesList : BehaviorRelay<[Movies]> = BehaviorRelay(value: [])
-    private let nowPlayingMoviesList : BehaviorRelay<[Movies]> = BehaviorRelay(value: [])
+    private let genreCountObject : BehaviorRelay<GenreBody> = BehaviorRelay(value: GenreBody())
+    private let discoverMoviesList : BehaviorRelay<[Movies]> = BehaviorRelay(value: [])
+    private let genresList : BehaviorRelay<[Genres]> = BehaviorRelay(value: [])
     private var detailController     : DetailViewController?
     
     //MARK: LAYOUT SUBVIEWS
-    @IBOutlet weak var topRatedCard: CustomViewCollection!
-    @IBOutlet weak var upcomingCard: CustomViewCollection!
-    @IBOutlet weak var nowPlayingCard: CustomViewCollection!
+    @IBOutlet weak var discoverCard: CustomViewCollection!
+    @IBOutlet weak var genresCollectionView: UICollectionView!
+    private let refreshControl = UIRefreshControl()
+    @IBOutlet weak var scrollView: UIScrollView!
     
     //MARK: VIEW WILL APPEAR
     public override func viewWillAppear(_ animated: Bool) {
@@ -31,7 +32,7 @@ public class HomeViewController: UIViewController {
         /// Fetch all movies type endpoint from server
         Task {
             SVProgressHUD.show(withStatus: "Fetching Movies")
-            await homeViewModel.onAppear()
+            await homeViewModel.onAppear(genreCountObject.value)
         }
     }
     
@@ -39,87 +40,81 @@ public class HomeViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.tintColor = .white
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        scrollView.addSubview(refreshControl)
+        
         //MARK: - Instantiate Collection View Label
-        topRatedCard.collectionViewLabel.text   = "Top Rated Movies"
-        upcomingCard.collectionViewLabel.text   = "Upcoming Movies"
-        nowPlayingCard.collectionViewLabel.text = "Now Playing Movies"
+        discoverCard.collectionViewLabel.text   = "Discover Movies"
+        discoverCard.collectionView.rx.setDelegate(self).disposed(by: bags)
       
         //MARK: - Register Controller
         detailController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "detailViewController") as DetailViewController
         
         //MARK: - TableView Datasource and Delegate Functions
-            //MARK: - Bind topRatedMoviesList with Table View
-            /// Bind topRatedMoviesList with Table View
-            topRatedMoviesList.bind(to: topRatedCard.collectionView.rx.items(cellIdentifier: MovieCollectionViewCell.cellID, cellType: MovieCollectionViewCell.self)) { row, model, cell in
-                /// Configure Table View cell based on Top Rated Movie Object.
-                cell.configureCell(model)
-            }.disposed(by: bags)
-            
+     
             //MARK: - Bind upcomingMoviesList with Table View
             /// Bind upcomingMoviesList with Table View
-            upcomingMoviesList.bind(to: upcomingCard.collectionView.rx.items(cellIdentifier: MovieCollectionViewCell.cellID, cellType: MovieCollectionViewCell.self)) { row, model, cell in
+            discoverMoviesList.bind(to: discoverCard.collectionView.rx.items(cellIdentifier: MovieCollectionViewCell.cellID, cellType: MovieCollectionViewCell.self)) { row, model, cell in
                 /// Configure Table View cell based on Upcoming Movie Object.
                 cell.configureCell(model)
             }.disposed(by: bags)
-            
-            //MARK: - Bind nowPlayingMoviesList with Table View
-            /// Bind nowPlayingMoviesList with Table View
-            nowPlayingMoviesList.bind(to: nowPlayingCard.collectionView.rx.items(cellIdentifier: MovieCollectionViewCell.cellID, cellType: MovieCollectionViewCell.self)) { row, model, cell in
-                /// Configure Table View cell based on Now Palying Movie Object.
+        
+            //MARK: - Bind upcomingMoviesList with Table View
+            /// Bind upcomingMoviesList with Table View
+            genresList.bind(to: genresCollectionView.rx.items(cellIdentifier: GenresCollectionViewCell.cellID, cellType: GenresCollectionViewCell.self)) { row, model, cell in
+                /// Configure Table View cell based on Genres
                 cell.configureCell(model)
             }.disposed(by: bags)
-        
-            //MARK: - Now Playing Collection View DidSelect Delegate Function
-            /// Response User Touch on Now Playing Collection View
-            nowPlayingCard.collectionView.rx.itemSelected.subscribe(onNext: { [self] (indexPath) in
-                
-                /// Send User's choosen Now Playing Movie Object to response handleMovieFunction
-                responseHandleMovie(nowPlayingMoviesList.value[indexPath.row], indexPath, nowPlayingCard.collectionView)
-            }).disposed(by: bags)
             
             //MARK: - Upcoming Collection View DidSelect Delegate Function
             /// Response User Touch on Upcoming Collection View
-            upcomingCard.collectionView.rx.itemSelected.subscribe(onNext: { [self] (indexPath) in
-                
+            discoverCard.collectionView.rx.itemSelected.subscribe(onNext: { [self] (indexPath) in
                 /// Send User's choosen Upcoming Movie Object to response handleMovieFunction
-                responseHandleMovie(upcomingMoviesList.value[indexPath.row], indexPath, upcomingCard.collectionView)
+                responseHandleMovie(discoverMoviesList.value[indexPath.row], indexPath, discoverCard.collectionView)
             }).disposed(by: bags)
-            
-            //MARK: - Top Rated Collection View DidSelect Delegate Function
-            /// Response User Touch on Top Rated Collection View
-            topRatedCard.collectionView.rx.itemSelected.subscribe(onNext: { [self] (indexPath) in
-                /// Send User's choosen Top Rated Movie Object to response handleMovieFunction
-                responseHandleMovie(topRatedMoviesList.value[indexPath.row], indexPath,topRatedCard.collectionView)
+        
+            //MARK: - Upcoming Collection View DidSelect Delegate Function
+            /// Response User Touch on Upcoming Collection View
+            genresCollectionView.rx.itemSelected.subscribe(onNext: { [self] (indexPath) in
+                /// Send User's choosen Upcoming Movie Object to response handleMovieFunction
+                DispatchQueue.main.async { [self] in
+                    SVProgressHUD.show(withStatus: "Fetching Movies")
+                    discoverCard.collectionViewLabel.text = "Discover \(genresList.value[indexPath.row].name) Movies"
+                }
+                Task {
+                    genreCountObject.accept(GenreBody(page: 1, genresName: String(genresList.value[indexPath.row].id)))
+                    homeViewModel.discoverMoviesArrayObject.accept([])
+                    await homeViewModel.fetchMovies(genreCountObject.value)
+                }
             }).disposed(by: bags)
         
         //MARK: - Object Observer for UI Logic.
             //MARK: - Observer for Upcoming Movie List
             /// Update upcomingMovieList on value changes
-            homeViewModel.upcomingMoviesArrayObjectObserver.subscribe(onNext: { [self] (value) in
-                SVProgressHUD.dismiss()
-                upcomingMoviesList.accept(value)
+            homeViewModel.discoverMoviesArrayObjectObserver.subscribe(onNext: { [self] (value) in
+                DispatchQueue.main.async { [self] in
+                    SVProgressHUD.dismiss()
+                    refreshControl.endRefreshing()
+                }
+                discoverMoviesList.accept(value)
+            },onError: { error in
+                self.present(errorAlert(), animated: true)
+            }).disposed(by: bags)
+        
+            //MARK: - Observer for Upcoming Movie List
+            /// Update upcomingMovieList on value changes
+            homeViewModel.genresArrayObjectObserver.subscribe(onNext: { [self] (value) in
+                DispatchQueue.main.async { [self] in
+                    SVProgressHUD.dismiss()
+                    refreshControl.endRefreshing()
+                }
+                genresList.accept(value)
             },onError: { error in
                 self.present(errorAlert(), animated: true)
             }).disposed(by: bags)
             
-            //MARK: - Observer for Top Rated Movie List
-            /// Update topRatedMovieList on value changes
-            homeViewModel.topRatedMoviesArrayObjectObserver.subscribe(onNext: { [self] (value) in
-                SVProgressHUD.dismiss()
-                topRatedMoviesList.accept(value)
-            },onError: { error in
-                self.present(errorAlert(), animated: true)
-            }).disposed(by: bags)
-        
-            //MARK: - Observer for Now Playing Movie List
-            /// Update nowPlayingMovieList on value changes
-            homeViewModel.nowPlayingMoviesArrayObjectObserver.subscribe(onNext: { [self] (value) in
-                SVProgressHUD.dismiss()
-                nowPlayingMoviesList.accept(value)
-            },onError: { error in
-                self.present(errorAlert(), animated: true)
-            }).disposed(by: bags)
-        
         //MARK: - Observer for Endpoint Error State
             //MARK: - Observer for Endpoint Error
             /// Inform user if there's any problem with their internet connection via UIAlertController
@@ -147,4 +142,27 @@ public class HomeViewController: UIViewController {
         detailController?.movieIdObject.accept(movies.id)
         navigationController?.pushViewController(detailController ?? DetailViewController(), animated: true)
     }
+    
+    @objc func refresh(_ sender: AnyObject) {
+        Task {
+            SVProgressHUD.show(withStatus: "Fetching Movies")
+            await homeViewModel.fetchMovies(genreCountObject.value)
+        }
+    }
+}
+
+extension HomeViewController : UIScrollViewDelegate {
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if homeViewModel.determineScrollViewPosition(scrollView) {
+            Task {
+                genreCountObject.accept(GenreBody(page: genreCountObject.value.page+1, genresName: genreCountObject.value.genresName))
+                SVProgressHUD.show(withStatus: "Fetching Movies")
+                await homeViewModel.fetchMovies(genreCountObject.value)
+            }
+        }
+    }
+}
+
+extension HomeViewController : UICollectionViewDelegate {
+    
 }

@@ -28,6 +28,10 @@ class MovieCollectionViewCell: UICollectionViewCell {
     /// - Parameters:
     ///     - movies: object that's gonna be setup as the base url string for the poster path.
     func configureCell(_ movies : Movies) {
-        movieImageView.sd_setImage(with: URL(string: "\(baseImageURL)\(movies.posterPath)"), placeholderImage: UIImage(named: "placeholderImage") ?? UIImage(data: Data()))
+        if movies.posterPath != nil {
+            movieImageView.sd_setImage(with: URL(string: "\(baseImageURL)\(movies.posterPath!)"), placeholderImage: UIImage(named: "placeholderImage") ?? UIImage(data: Data()))
+        }else {
+            movieImageView.image = UIImage(named: "placeholderImage") ?? UIImage(data: Data())
+        }
     }
 }
