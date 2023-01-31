@@ -187,17 +187,14 @@
 		4B00BAF3296E8B4B008FB05C /* TMDB */ = {
 			isa = PBXGroup;
 			children = (
-				4B00BB24296E9026008FB05C /* Base */,
-				4B00BB2B296E9073008FB05C /* Services */,
-				4B00BB28296E904E008FB05C /* Components */,
-				4B00BB27296E9031008FB05C /* ViewModels */,
-				4B00BB26296E902D008FB05C /* Views */,
-				4B00BB51296EF02B008FB05C /* Storyboard */,
-				4B00BB2C296E907C008FB05C /* Utils */,
-				4B00BAFD296E8B4C008FB05C /* Assets.xcassets */,
-				4B00BAFF296E8B4C008FB05C /* LaunchScreen.storyboard */,
 				4B00BB02296E8B4C008FB05C /* Info.plist */,
 				4B3D3478297041DC00FD0C77 /* TMDB-Info.plist */,
+				4BB4F1592989012C0049824C /* app-settings */,
+				4BB4F14A298900750049824C /* app-modules */,
+				4B00BB51296EF02B008FB05C /* app-ui */,
+				4BB4F1492989005B0049824C /* app-icons */,
+				4B00BB2C296E907C008FB05C /* app-utils */,
+				4B00BB27296E9031008FB05C /* ViewModels */,
 			);
 			path = TMDB;
 			sourceTree = "<group>";
@@ -219,24 +216,6 @@
 			path = TMDBUITests;
 			sourceTree = "<group>";
 		};
-		4B00BB24296E9026008FB05C /* Base */ = {
-			isa = PBXGroup;
-			children = (
-				4B00BAF4296E8B4B008FB05C /* AppDelegate.swift */,
-				4B00BAF6296E8B4B008FB05C /* SceneDelegate.swift */,
-			);
-			path = Base;
-			sourceTree = "<group>";
-		};
-		4B00BB26296E902D008FB05C /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				4BE7A071296FCB4000FE4BC4 /* Detail */,
-				4BE7A06F296F18E000FE4BC4 /* Home */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		4B00BB27296E9031008FB05C /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -246,62 +225,43 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		4B00BB28296E904E008FB05C /* Components */ = {
+		4B00BB2B296E9073008FB05C /* network-utils */ = {
 			isa = PBXGroup;
 			children = (
-				4B00BB2A296E9063008FB05C /* Shared Layouts */,
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
-		4B00BB2A296E9063008FB05C /* Shared Layouts */ = {
-			isa = PBXGroup;
-			children = (
-				4B00BB4D296EEF13008FB05C /* MovieCollectionViewCell */,
-				4BE7A065296EFB8500FE4BC4 /* CustomViewCollection */,
-				4B00BB4E296EEFFD008FB05C /* NavigationController */,
-			);
-			path = "Shared Layouts";
-			sourceTree = "<group>";
-		};
-		4B00BB2B296E9073008FB05C /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				4B00BB2E296E90A6008FB05C /* Networking */,
-				4B00BB2D296E909E008FB05C /* Networking Domain */,
+				4B00BB2E296E90A6008FB05C /* networking */,
+				4B00BB2D296E909E008FB05C /* netwoking-domain */,
 				4B00BB30296E913E008FB05C /* NetworkService.swift */,
 			);
-			path = Services;
+			path = "network-utils";
 			sourceTree = "<group>";
 		};
-		4B00BB2C296E907C008FB05C /* Utils */ = {
+		4B00BB2C296E907C008FB05C /* app-utils */ = {
 			isa = PBXGroup;
 			children = (
-				4B00BB3D296E9225008FB05C /* Enums.swift */,
-				4B00BB43296ED014008FB05C /* HelperFunction.swift */,
-				4B00BB45296ED030008FB05C /* ClassExtensions.swift */,
-				4B00BB47296ED056008FB05C /* SharedObjects.swift */,
+				4B00BB2B296E9073008FB05C /* network-utils */,
+				4BB4F158298901120049824C /* constant-utils */,
+				4BB4F1572989010B0049824C /* ui-utils */,
 			);
-			path = Utils;
+			path = "app-utils";
 			sourceTree = "<group>";
 		};
-		4B00BB2D296E909E008FB05C /* Networking Domain */ = {
+		4B00BB2D296E909E008FB05C /* netwoking-domain */ = {
 			isa = PBXGroup;
 			children = (
 				4B00BB39296E91C0008FB05C /* Application Endpoint.swift */,
 				4B00BB3B296E91E3008FB05C /* Response.swift */,
 			);
-			path = "Networking Domain";
+			path = "netwoking-domain";
 			sourceTree = "<group>";
 		};
-		4B00BB2E296E90A6008FB05C /* Networking */ = {
+		4B00BB2E296E90A6008FB05C /* networking */ = {
 			isa = PBXGroup;
 			children = (
 				4B00BB32296E9153008FB05C /* Endpoint.swift */,
 				4B00BB34296E9163008FB05C /* NetworkError.swift */,
 				4B00BB36296E9197008FB05C /* NetworkLogger.swift */,
 			);
-			path = Networking;
+			path = networking;
 			sourceTree = "<group>";
 		};
 		4B00BB4D296EEF13008FB05C /* MovieCollectionViewCell */ = {
@@ -321,36 +281,22 @@
 			path = NavigationController;
 			sourceTree = "<group>";
 		};
-		4B00BB51296EF02B008FB05C /* Storyboard */ = {
+		4B00BB51296EF02B008FB05C /* app-ui */ = {
 			isa = PBXGroup;
 			children = (
+				4BB4F15A298901AF0049824C /* components */,
+				4B00BAFF296E8B4C008FB05C /* LaunchScreen.storyboard */,
 				4B00BAFA296E8B4B008FB05C /* Main.storyboard */,
 			);
-			path = Storyboard;
+			path = "app-ui";
 			sourceTree = "<group>";
 		};
-		4B33E9AF2987B1AE006EFCA5 /* Components */ = {
+		4B33E9AF2987B1AE006EFCA5 /* components */ = {
 			isa = PBXGroup;
 			children = (
 				4B33E9B02987B1C1006EFCA5 /* GenresCollectionViewCell.swift */,
 			);
-			path = Components;
-			sourceTree = "<group>";
-		};
-		4B33E9B42987C408006EFCA5 /* Body */ = {
-			isa = PBXGroup;
-			children = (
-				4B33E9B52987C42E006EFCA5 /* GenreBody.swift */,
-			);
-			path = Body;
-			sourceTree = "<group>";
-		};
-		4B3D34752970125E00FD0C77 /* Pages */ = {
-			isa = PBXGroup;
-			children = (
-				4B3D34762970127200FD0C77 /* ReviewViewController.swift */,
-			);
-			path = Pages;
+			path = components;
 			sourceTree = "<group>";
 		};
 		4B772D7B296FDE0A0022B8A7 /* ReviewTableViewCell */ = {
@@ -370,31 +316,219 @@
 			path = Detail;
 			sourceTree = "<group>";
 		};
-		4B772D85296FE6570022B8A7 /* Response */ = {
+		4BB4F1492989005B0049824C /* app-icons */ = {
+			isa = PBXGroup;
+			children = (
+				4B00BAFD296E8B4C008FB05C /* Assets.xcassets */,
+			);
+			path = "app-icons";
+			sourceTree = "<group>";
+		};
+		4BB4F14A298900750049824C /* app-modules */ = {
+			isa = PBXGroup;
+			children = (
+				4BB4F15B298902130049824C /* review-module */,
+				4BB4F14C2989008E0049824C /* detail-module */,
+				4BB4F14B2989007C0049824C /* home-module */,
+			);
+			path = "app-modules";
+			sourceTree = "<group>";
+		};
+		4BB4F14B2989007C0049824C /* home-module */ = {
+			isa = PBXGroup;
+			children = (
+				4BB4F152298900C70049824C /* views */,
+				4BB4F153298900CB0049824C /* interactors */,
+				4BB4F154298900E20049824C /* presenters */,
+				4BB4F155298900E80049824C /* entities */,
+				4BB4F156298900F30049824C /* routers */,
+			);
+			path = "home-module";
+			sourceTree = "<group>";
+		};
+		4BB4F14C2989008E0049824C /* detail-module */ = {
+			isa = PBXGroup;
+			children = (
+				4BB4F14D298900990049824C /* views */,
+				4BB4F14E2989009F0049824C /* interactors */,
+				4BB4F14F298900A40049824C /* presenters */,
+				4BB4F150298900AA0049824C /* entities */,
+				4BB4F151298900B00049824C /* routers */,
+			);
+			path = "detail-module";
+			sourceTree = "<group>";
+		};
+		4BB4F14D298900990049824C /* views */ = {
+			isa = PBXGroup;
+			children = (
+				4BE7A072296FD12C00FE4BC4 /* DetailViewController.swift */,
+				4BDD95D5296FD84700A2F21A /* components */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		4BB4F14E2989009F0049824C /* interactors */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = interactors;
+			sourceTree = "<group>";
+		};
+		4BB4F14F298900A40049824C /* presenters */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = presenters;
+			sourceTree = "<group>";
+		};
+		4BB4F150298900AA0049824C /* entities */ = {
 			isa = PBXGroup;
 			children = (
 				4B772D83296FE5EE0022B8A7 /* MovieDetails.swift */,
 				4B772D89296FF1890022B8A7 /* Video.swift */,
-				4B3D3473296FFD2A00FD0C77 /* Review.swift */,
 				4B33E9B22987C063006EFCA5 /* Genres.swift */,
 			);
-			path = Response;
+			path = entities;
 			sourceTree = "<group>";
 		};
-		4BDD95D5296FD84700A2F21A /* Components */ = {
+		4BB4F151298900B00049824C /* routers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = routers;
+			sourceTree = "<group>";
+		};
+		4BB4F152298900C70049824C /* views */ = {
+			isa = PBXGroup;
+			children = (
+				4B00BAF8296E8B4B008FB05C /* HomeViewController.swift */,
+				4B33E9AF2987B1AE006EFCA5 /* components */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		4BB4F153298900CB0049824C /* interactors */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = interactors;
+			sourceTree = "<group>";
+		};
+		4BB4F154298900E20049824C /* presenters */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = presenters;
+			sourceTree = "<group>";
+		};
+		4BB4F155298900E80049824C /* entities */ = {
+			isa = PBXGroup;
+			children = (
+				4B33E9B52987C42E006EFCA5 /* GenreBody.swift */,
+				4BE7A06A296F149A00FE4BC4 /* Movies.swift */,
+			);
+			path = entities;
+			sourceTree = "<group>";
+		};
+		4BB4F156298900F30049824C /* routers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = routers;
+			sourceTree = "<group>";
+		};
+		4BB4F1572989010B0049824C /* ui-utils */ = {
+			isa = PBXGroup;
+			children = (
+				4B00BB43296ED014008FB05C /* HelperFunction.swift */,
+				4B00BB45296ED030008FB05C /* ClassExtensions.swift */,
+			);
+			path = "ui-utils";
+			sourceTree = "<group>";
+		};
+		4BB4F158298901120049824C /* constant-utils */ = {
+			isa = PBXGroup;
+			children = (
+				4B00BB3D296E9225008FB05C /* Enums.swift */,
+				4B00BB47296ED056008FB05C /* SharedObjects.swift */,
+			);
+			path = "constant-utils";
+			sourceTree = "<group>";
+		};
+		4BB4F1592989012C0049824C /* app-settings */ = {
+			isa = PBXGroup;
+			children = (
+				4B00BAF4296E8B4B008FB05C /* AppDelegate.swift */,
+				4B00BAF6296E8B4B008FB05C /* SceneDelegate.swift */,
+			);
+			path = "app-settings";
+			sourceTree = "<group>";
+		};
+		4BB4F15A298901AF0049824C /* components */ = {
+			isa = PBXGroup;
+			children = (
+				4B00BB4D296EEF13008FB05C /* MovieCollectionViewCell */,
+				4BE7A065296EFB8500FE4BC4 /* CustomViewCollection */,
+				4B00BB4E296EEFFD008FB05C /* NavigationController */,
+			);
+			path = components;
+			sourceTree = "<group>";
+		};
+		4BB4F15B298902130049824C /* review-module */ = {
+			isa = PBXGroup;
+			children = (
+				4BB4F15C298902190049824C /* views */,
+				4BB4F15D298902250049824C /* interactors */,
+				4BB4F15E298902290049824C /* presenters */,
+				4BB4F15F2989022F0049824C /* entities */,
+				4BB4F160298902340049824C /* routers */,
+			);
+			path = "review-module";
+			sourceTree = "<group>";
+		};
+		4BB4F15C298902190049824C /* views */ = {
+			isa = PBXGroup;
+			children = (
+				4B3D34762970127200FD0C77 /* ReviewViewController.swift */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		4BB4F15D298902250049824C /* interactors */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = interactors;
+			sourceTree = "<group>";
+		};
+		4BB4F15E298902290049824C /* presenters */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = presenters;
+			sourceTree = "<group>";
+		};
+		4BB4F15F2989022F0049824C /* entities */ = {
+			isa = PBXGroup;
+			children = (
+				4B3D3473296FFD2A00FD0C77 /* Review.swift */,
+			);
+			path = entities;
+			sourceTree = "<group>";
+		};
+		4BB4F160298902340049824C /* routers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = routers;
+			sourceTree = "<group>";
+		};
+		4BDD95D5296FD84700A2F21A /* components */ = {
 			isa = PBXGroup;
 			children = (
 				4B772D7B296FDE0A0022B8A7 /* ReviewTableViewCell */,
 			);
-			path = Components;
-			sourceTree = "<group>";
-		};
-		4BDD95D6296FD84D00A2F21A /* Domain */ = {
-			isa = PBXGroup;
-			children = (
-				4B772D85296FE6570022B8A7 /* Response */,
-			);
-			path = Domain;
+			path = components;
 			sourceTree = "<group>";
 		};
 		4BE7A065296EFB8500FE4BC4 /* CustomViewCollection */ = {
@@ -412,44 +546,6 @@
 				4BE7A067296F0B8400FE4BC4 /* HomeViewModel.swift */,
 			);
 			path = Home;
-			sourceTree = "<group>";
-		};
-		4BE7A069296F12B900FE4BC4 /* Domain */ = {
-			isa = PBXGroup;
-			children = (
-				4B33E9B42987C408006EFCA5 /* Body */,
-				4BE7A06C296F14AE00FE4BC4 /* Response */,
-			);
-			path = Domain;
-			sourceTree = "<group>";
-		};
-		4BE7A06C296F14AE00FE4BC4 /* Response */ = {
-			isa = PBXGroup;
-			children = (
-				4BE7A06A296F149A00FE4BC4 /* Movies.swift */,
-			);
-			path = Response;
-			sourceTree = "<group>";
-		};
-		4BE7A06F296F18E000FE4BC4 /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				4B33E9AF2987B1AE006EFCA5 /* Components */,
-				4BE7A069296F12B900FE4BC4 /* Domain */,
-				4B00BAF8296E8B4B008FB05C /* HomeViewController.swift */,
-			);
-			path = Home;
-			sourceTree = "<group>";
-		};
-		4BE7A071296FCB4000FE4BC4 /* Detail */ = {
-			isa = PBXGroup;
-			children = (
-				4BDD95D6296FD84D00A2F21A /* Domain */,
-				4BDD95D5296FD84700A2F21A /* Components */,
-				4B3D34752970125E00FD0C77 /* Pages */,
-				4BE7A072296FD12C00FE4BC4 /* DetailViewController.swift */,
-			);
-			path = Detail;
 			sourceTree = "<group>";
 		};
 		C3A457D105558BC9F848BF2C /* Frameworks */ = {
