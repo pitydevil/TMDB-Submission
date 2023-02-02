@@ -1,34 +1,20 @@
 //
-//  HomeViewModel.swift
+//  HomeInteractor.swift
 //  TMDB
 //
-//  Created by Mikhael Adiputra on 11/01/23.
+//  Created by Mikhael Adiputra on 31/01/23.
 //
 
 import Foundation
 import RxCocoa
 import RxSwift
 
-class HomeViewModel {
+class HomeInteractor : PresenterToInteractorProtocol {
 
     //MARK: - OBJECT DECLARATION
     private let networkService    : NetworkServicing
-    private let genresMoviesArrayObject   = BehaviorRelay<[Genres]>(value: [])
-    private var genericHandlingErrorObject = BehaviorRelay<genericHandlingError>(value: .success)
+    var presenter: InteractorToPresenterProtocol?
     let discoverMoviesArrayObject   = BehaviorRelay<[Movies]>(value: [])
-    
-    //MARK: - OBJECT OBSERVER DECLARATION
-    var discoverMoviesArrayObjectObserver   : Observable<[Movies]> {
-        return discoverMoviesArrayObject.asObservable()
-    }
-    
-    var genresArrayObjectObserver   : Observable<[Genres]> {
-        return genresMoviesArrayObject.asObservable()
-    }
-    
-    var genericHandlingErrorObserver   : Observable<genericHandlingError> {
-        return genericHandlingErrorObject.asObservable()
-    }
 
     //MARK: - INIT OBJECT DECLARATION
     init(networkService: NetworkServicing = NetworkService()) {
@@ -37,14 +23,14 @@ class HomeViewModel {
     
     //MARK: - OnAppear Function
     /// Set task group for all async function on appear for detailViewController
-    func onAppear(_ genreBody : GenreBody) async {
+    func onAppear(_ genreObject: GenreBody) async {
         await withTaskGroup(of: Void.self) { [weak self] group in
             guard let self = self else { return }
             
             /// Fetch Upcoming Movie from endpoint
             /// from the given components.
             group.addTask { [self] in
-                await self.fetchMovies(genreBody)
+                await self.fetchMovies(genreObject, false)
             }
             
             /// Fetch Top Rated  Movie from endpoint
@@ -58,34 +44,38 @@ class HomeViewModel {
     //MARK: - Fetch Genres
     /// Fetch Genres
     /// from given components.
-    private func fetchGenres() async {
+    func fetchGenres() async {
         let endpoint = ApplicationEndpoint<Any>.getGenres
         let result = await networkService.request(to: endpoint, decodeTo: Genre.self)
         switch result {
         case .success(let response):
-            genresMoviesArrayObject.accept(response.genres)
+            self.presenter?.noticeFetchGenresSuccess(response.genres)
         case .failure(_):
-            genericHandlingErrorObject.accept(genericHandlingError(rawValue: 500)!)
+            self.presenter?.noticeFetchFailed()
         }
     }
-
+    
     //MARK: - Fetch Movies
     /// Fetch Movies
     /// from given components.
     /// - Parameters:
     ///     - enumState: movie type that's gonan be passed onto the fetch movie endpoint
-    func fetchMovies(_ genreObject : GenreBody) async {
+    func fetchMovies(_ genreObject: GenreBody,_ resetArgs : Bool) async{
         let endpoint = ApplicationEndpoint.getDiscover(genreObject)
         let result = await networkService.request(to: endpoint, decodeTo: Response<[Movies]>.self)
         switch result {
         case .success(let response):
             if let movies = response.results {
+                if resetArgs {
+                    discoverMoviesArrayObject.accept([])
+                }
                 var appendedMovies = discoverMoviesArrayObject.value
                 appendedMovies.append(contentsOf: movies)
                 discoverMoviesArrayObject.accept(appendedMovies)
+                self.presenter?.notifeFetchMoviesSuccess(appendedMovies)
             }
         case .failure(_):
-            genericHandlingErrorObject.accept(genericHandlingError(rawValue: 500)!)
+            self.presenter?.noticeFetchFailed()
         }
     }
     
@@ -94,10 +84,10 @@ class HomeViewModel {
     /// from given components.
     /// - Parameters:
     ///     - scrollView
-    func determineScrollViewPosition(_ scrollView : UIScrollView) -> Bool {
+    func determineScrollViewPosition(_ scrollView : UIScrollView) {
         let height = scrollView.frame.width
         let contentSizeHeight = scrollView.contentSize.width
         let offset = scrollView.contentOffset.x
-        return (offset + height == contentSizeHeight)
+        self.presenter?.noticeScrollViewPosition((offset + height == contentSizeHeight))
     }
 }

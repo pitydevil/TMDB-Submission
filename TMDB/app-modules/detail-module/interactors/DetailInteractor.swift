@@ -1,50 +1,20 @@
 //
-//  DetailHomeViewModel.swift
+//  DetailInteractor.swift
 //  TMDB
 //
-//  Created by Mikhael Adiputra on 12/01/23.
+//  Created by Mikhael Adiputra on 02/02/23.
 //
 
 import Foundation
-import RxSwift
 import RxCocoa
+import RxSwift
 
-class DetailHomeViewModel {
-
-    //MARK: - INIT OBJECT DECLARATION
+class DetailInteractor : PresenterToInteractorDetailProtocol {
+    
+    //MARK: - OBJECT DECLARATION
     private let networkService    : NetworkServicing
-    private let detailMoviesObject   = BehaviorRelay<MovieDetails>(value: MovieDetails())
-    private let reviewMovieObject   = BehaviorRelay<[Review]>(value: [])
-    private let moviesRecommendationObject   = BehaviorRelay<[Movies]>(value: [])
-    private let detailMoviesVideosObject   = BehaviorRelay<String>(value: String())
-    private let genericHandlingErrorObject = BehaviorRelay<genericHandlingError>(value: .success)
-    private let videoHandlingErrorObject = BehaviorRelay<videoHandlingError>(value: .exist)
-    
-    //MARK: - OBJECT OBSERVER DECLARATION
-    var detailMovieObjectObserver  : Observable<MovieDetails> {
-        return detailMoviesObject.asObservable()
-    }
-    
-    var detailMovieVideosObjectObserver  : Observable<String> {
-        return detailMoviesVideosObject.asObservable()
-    }
-    
-    var movieRecommendationObjectArrayObserver   : Observable<[Movies]> {
-        return moviesRecommendationObject.asObservable()
-    }
-    
-    var reviewMovieObjectObserver   : Observable<[Review]> {
-        return reviewMovieObject.asObservable()
-    }
-    
-    var genericHandlingErrorObserver   : Observable<genericHandlingError> {
-        return genericHandlingErrorObject.asObservable()
-    }
-    
-    var videoHandlingErrorObserver   : Observable<videoHandlingError> {
-        return videoHandlingErrorObject.asObservable()
-    }
-
+    var presenter: InteractorToPresenterDetailProtocol?
+  
     //MARK: - INIT OBJECT DECLARATION
     init(networkService: NetworkServicing = NetworkService()) {
         self.networkService = networkService
@@ -89,14 +59,14 @@ class DetailHomeViewModel {
     /// from given components.
     /// - Parameters:
     ///     - movieID:  id  for querying the movie details, recommendation, and movie reviews
-    private func fetchDetailMovies(_ movieID : Int) async {
+    func fetchDetailMovies(_ movieID : Int) async {
         let endpoint = ApplicationEndpoint.getDetailMovie(movieID)
         let result = await networkService.request(to: endpoint, decodeTo: MovieDetails.self)
         switch result {
         case .success(let response):
-            detailMoviesObject.accept(response)
+            self.presenter?.noticeDetailMovie(response)
         case .failure(_):
-            genericHandlingErrorObject.accept(genericHandlingError(rawValue: 500)!)
+            self.presenter?.noticeFetchFailed()
         }
     }
     
@@ -105,18 +75,18 @@ class DetailHomeViewModel {
     /// from given components.
     /// - Parameters:
     ///     - movieID:  id  for querying the movie details, recommendation, and movie reviews
-    private func fetchDetailMoviesVideo(_ movieID : Int) async {
+    func fetchDetailMoviesVideo(_ movieID : Int) async {
         let endpoint = ApplicationEndpoint.getDetailMovieVideos(movieID)
         let result = await networkService.request(to: endpoint, decodeTo: Video.self)
         switch result {
         case .success(let response):
             if !response.results.isEmpty {
-                detailMoviesVideosObject.accept(response.results[0].key)
+                self.presenter?.noticeDetailMoviesVideo(response.results[0].key)
             }else {
-                videoHandlingErrorObject.accept(.notExist)
+                self.presenter?.noticeDetailMovieFailed()
             }
         case .failure(_):
-            genericHandlingErrorObject.accept(genericHandlingError(rawValue: 500)!)
+            self.presenter?.noticeFetchFailed()
         }
     }
     
@@ -124,16 +94,16 @@ class DetailHomeViewModel {
     /// Fetch Movie Recommendation based on MovieID  from endpoint
     /// - Parameters:
     ///     - movieID:  id  for querying the movie details, recommendation, and movie reviews
-    private func fetchMovieRecommendation(_ movieID : Int) async {
+    func fetchMovieRecommendation(_ movieID : Int) async {
         let endpoint = ApplicationEndpoint.getMovieRecommendation(movieID)
         let result = await networkService.request(to: endpoint, decodeTo: Response<[Movies]>.self)
         switch result {
         case .success(let response):
             if let movies = response.results {
-                moviesRecommendationObject.accept(movies)
+                self.presenter?.noticeMovieRecommendation(movies)
             }
         case .failure(_):
-            genericHandlingErrorObject.accept(genericHandlingError(rawValue: 500)!)
+            self.presenter?.noticeFetchFailed()
         }
     }
     
@@ -141,16 +111,16 @@ class DetailHomeViewModel {
     /// Fetch Movie Reviews based on MovieID  from endpoint
     /// - Parameters:
     ///     - movieID:  id  for querying the movie details, recommendation, and movie reviews
-    private func fetchMovieReviews(_ movieID : Int) async {
+    func fetchMovieReviews(_ movieID : Int) async {
         let endpoint = ApplicationEndpoint.getDetailMovieReviews(movieID)
         let result = await networkService.request(to: endpoint, decodeTo: ResponseReview<Review>.self)
         switch result {
         case .success(let response):
             if let reviews = response.results {
-                reviewMovieObject.accept(reviews)
+                self.presenter?.noticeMovieReviews(reviews)
             }
         case .failure(_):
-            genericHandlingErrorObject.accept(genericHandlingError(rawValue: 500)!)
+            self.presenter?.noticeFetchFailed()
         }
     }
 }
